@@ -1,95 +1,103 @@
-(() => {
-  window.addEventListener('DOMContentLoaded', () => {
-    // --------------------------------------------------
-    // DECLARE VARS
-    // --------------------------------------------------
-    const btnElem = document.querySelector('#btn');
-    const stackElem = document.querySelector('#stack');
+((window) => {
+  const __ = window.__HISTORY_VISUALIZER__ = window.__HISTORY_VISUALIZER__ || {};
+  __.count = 0;
+  __.originalPushState = window.history.pushState;
+  __.elems = {};
+  __.utils = {};
 
-    // --------------------------------------------------
-    // DECLARE FUNCTIONS
-    // --------------------------------------------------
-    function addStackFrame(state) {
-      const elem = document.createElement('pre');
-      elem.innerText = JSON.stringify(state);
-      elem.dataset.frameId = window.__COUNT__;
-      elem.classList.add(getActiveClass());
+  // --------------------------------------------------
+  // DECLARE FUNCTIONS
+  // --------------------------------------------------
+  __.addStackFrame = function addStackFrame(state) {
+    const stackElem = __.utils.getOrCreateStackElem();
+    const elem = document.createElement('pre');
+    elem.innerText = JSON.stringify(state);
+    elem.dataset.frameId = __.count;
+    elem.classList.add(__.utils.getActiveClass());
 
-      if (!stack.childElementCount) {
-        stackElem.appendChild(elem)
-      } else {
-        stackElem.insertBefore(elem, stackElem.children[0]);
-      }
+    if (!stackElem.childElementCount) {
+      stackElem.appendChild(elem)
+    } else {
+      stackElem.insertBefore(elem, stackElem.children[0]);
+    }
+  }
+
+  __.clearStackFrames = function clearStackFrames(n) {
+    const elems = [];
+    let elem;
+
+    while (elem = document.querySelector(__.utils.getFrameSelector(n))) {
+      elems.push(elem);
+      n++;
     }
 
-    function clearStackFrames(n) {
-      const elems = [];
-      let elem;
+    elems.forEach(elem => elem.parentNode.removeChild(elem));
+  }
 
-      while (elem = document.querySelector(getFrameSelector(n))) {
-        elems.push(elem);
-        n++;
-      }
+  __.onPop = function onPop(e) {
+    __.preAddStackFrame();
+    document.querySelector(__.utils.getFrameSelector(e.state.count))
+      .classList.add(__.utils.getActiveClass());
+    __.count = e.state.count;
+  }
 
-      elems.forEach(elem => elem.parentNode.removeChild(elem));
+  __.preAddStackFrame = function preAddStackFrame() {
+    [ ...(document.querySelectorAll(__.utils.getActiveClass(true)) || [])]
+      .forEach(elem => elem.classList.remove(__.utils.getActiveClass()));
+  }
+
+  __.pushState = function pushState(state, title, url) {
+    // Bump count.
+    __.count++;
+
+    // Enhance state.
+    const enhancedState = { ...state, count: __.count };
+
+    // Invoke `pushState`.
+    __.originalPushState.apply(window.history, [enhancedState, title, url]);
+
+    // Handle frames.
+    __.clearStackFrames(__.count);
+    __.preAddStackFrame();
+    __.addStackFrame(enhancedState);
+  }
+
+  __.utils.getActiveClass = function getActiveClass(asSelector) {
+    const identifier = 'is-active';
+    return asSelector
+      ? __.utils.getClassAsSelector(identifier)
+      : identifier;
+  }
+
+  __.utils.getClassAsSelector = function(className) {
+    return `.${className}`;
+  }
+
+  __.utils.getOrCreateStackElem = function getActiveClass(asSelector) {
+    if (!__.elems.stackElem) {
+      const node = document.createElement('section');
+      node.classList.add(__.utils.getStackClass());
+      document.body.appendChild(node);
+      __.elems.stackElem = node;
     }
 
-    function getActiveClass(asSelector) {
-        const identifier = 'is-active';
-        return asSelector ? `.${identifier}` : identifier;
-    }
+    return __.elems.stackElem;
+  }
 
-    function getFrameSelector(n) {
-        return `[data-frame-id="${n}"]`;
-    }
+  __.utils.getFrameSelector = function getFrameSelector(n) {
+    return `[data-frame-id="${n}"]`;
+  }
 
-    function preAddStackFrame() {
-      [ ...(document.querySelectorAll(getActiveClass(true)) || [])]
-        .forEach(elem => elem.classList.remove(getActiveClass()));
-    }
+  __.utils.getStackClass = function getFrameSelector(asSelector) {
+    const identifier = 'stack';
+    return asSelector
+      ? __.utils.getClassAsSelector(identifier)
+      : identifier;
+  }
 
-    function pushState(state, title, url) {
-      // Bump count.
-      window.__COUNT__++;
-
-      // Enhance state.
-      const enhancedState = { ...state, count: window.__COUNT__ };
-
-      // Invoke `pushState`.
-      window.__ORIGINAL_PUSH_STATE__.apply(window.history, [enhancedState, title, url]);
-
-      // Handle frames.
-      clearStackFrames(window.__COUNT__ );
-      preAddStackFrame();
-      addStackFrame(enhancedState);
-    }
-
-    function onClick() {
-      const ts = new Date().getTime();
-      const state = { updatedAt: ts };
-      window.history.pushState(state, '', ts);
-    }
-
-    function onPop(e) {
-      preAddStackFrame();
-      document.querySelector(getFrameSelector(e.state.count))
-        .classList.add(getActiveClass());
-      window.__COUNT__ = e.state.count;
-    }
-
-    // --------------------------------------------------
-    // REGISTER EVENTS
-    // --------------------------------------------------
-    btnElem.addEventListener('click', onClick);
-
-    window.addEventListener('popstate', onPop);
-
-    // --------------------------------------------------
-    // INIT
-    // --------------------------------------------------
-    window.__COUNT__ = 0;
-    window.__ORIGINAL_PUSH_STATE__ = window.history.pushState;
-    window.history.pushState = pushState;
-    window.history.pushState({ updatedAt: new Date().getTime() }, '', window.location.pathname);
-  });
-})();
+  // --------------------------------------------------
+  // INIT
+  // --------------------------------------------------
+  window.addEventListener('popstate', __.onPop);
+  window.history.pushState = __.pushState;
+})(window);
