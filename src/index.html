@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>History Visualizer</title>
+    <style>
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+      }
+
+      html {
+        font-size: 62.5%;
+      }
+
+      body {
+        font-size: 16px;
+        padding: 30px;
+        background: #fafafa;
+      }
+
+      #btn {
+        width: 80%;
+        max-width: 300px;
+        background: darkslateblue;
+        color: #fff;
+        line-height: 44px;
+        border-radius: 22px;
+        margin:  0 auto 30px;
+        display: block;
+        font-size: 16px;
+      }
+
+      #stack {
+        width: 80%;
+        max-width: 500px;
+        display: block;
+        margin: 0 auto;
+        padding: 20px;
+        background: #fff;
+        box-shadow: 0 3px 20px -5px rgba(0, 0, 0, 0.15);
+      }
+
+      pre {
+        color: #aaa;
+        background: rgba(255, 255, 255, 0.1);
+        border: solid 1px #aaa;
+        padding: 10px;
+      }
+
+      pre:not(:last-child) {
+        margin-bottom: 5px;
+      }
+
+      pre.is-active {
+        color: limegreen;
+        background: rgba(50, 205, 50, 0.1);
+        border-color: limegreen;
+      }
+    </style>
+  </head>
+  <body>
+    <button id="btn">Next</button>
+    <section id="stack"></section>
+    <script src="./main.js"></script>
+  </body>
+</html>
