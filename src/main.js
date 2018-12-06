@@ -22,6 +22,52 @@
     }
   }
 
+  __.init = function init() {
+    // Inject styles
+    const styleElem = document.createElement('style');
+    const styles = `
+    .stack {
+      width: 90%;
+      max-width: 500px;
+      height: 100%;
+      display: block;
+      padding: 20px;
+      background: #fff;
+      position: fixed;
+      top: 0;
+      left: 0;
+      box-shadow: 0 3px 20px -5px rgba(0, 0, 0, 0.15);
+    }
+
+    pre {
+      color: #aaa;
+      background: rgba(0, 0, 0, 0.03);
+      border: solid 1px #aaa;
+      padding: 10px;
+      margin: 0;
+    }
+
+    pre:not(:last-child) {
+      margin-bottom: 10px;
+    }
+
+    pre.is-active {
+      color: limegreen;
+      background: rgba(50, 205, 50, 0.1);
+      border-color: limegreen;
+    }
+    `;
+
+    styleElem.innerHTML = styles;
+    document.head.appendChild(styleElem);
+
+    // Register listeners
+    window.addEventListener('popstate', __.onPop);
+
+    // Monkey-patch
+    window.history.pushState = __.pushState;
+  }
+
   __.clearStackFrames = function clearStackFrames(n) {
     const elems = [];
     let elem;
@@ -95,9 +141,9 @@
       : identifier;
   }
 
+
   // --------------------------------------------------
   // INIT
   // --------------------------------------------------
-  window.addEventListener('popstate', __.onPop);
-  window.history.pushState = __.pushState;
+  __.init();
 })(window);
