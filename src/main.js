@@ -38,6 +38,7 @@
       top: 0;
       left: 0;
       box-shadow: 0 3px 20px -5px rgba(0, 0, 0, 0.15);
+      z-index: 999999;
     }
 
     pre {
