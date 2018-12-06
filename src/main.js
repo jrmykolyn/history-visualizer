@@ -2,6 +2,7 @@
   const __ = window.__HISTORY_VISUALIZER__ = window.__HISTORY_VISUALIZER__ || {};
   __.count = 0;
   __.originalPushState = window.history.pushState;
+  __.originalReplaceState = window.history.replaceState;
   __.elems = {};
   __.utils = {};
 
@@ -66,6 +67,7 @@
 
     // Monkey-patch
     window.history.pushState = __.pushState;
+    window.history.replaceState = __.replaceState;
   }
 
   __.clearStackFrames = function clearStackFrames(n) {
@@ -106,6 +108,11 @@
     __.clearStackFrames(__.count);
     __.preAddStackFrame();
     __.addStackFrame(enhancedState);
+  }
+
+  __.replaceState = function replaceState(state, title, url) {
+    const enhancedState = { ...state, count: __.count };
+    __.originalReplaceState.apply(window.history, [enhancedState, title, url]);
   }
 
   __.utils.getActiveClass = function getActiveClass(asSelector) {
