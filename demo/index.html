@@ -41,7 +41,7 @@
   </head>
   <body>
     <button id="btn">Next</button>
-    <script src="./main.js"></script>
+    <script src="./../dist/main.js"></script>
     <script>
       // ELEMS.
       const btnElem = document.querySelector('#btn');
@@ -50,7 +50,7 @@
       btnElem.addEventListener('click', () => {
         const ts = new Date().getTime();
         const state = { updatedAt: ts };
-        window.history.pushState(state, '', ts);
+        window.history.pushState(state, '', `${window.location.pathname}?ts=${ts}`);
       });
 
       window.addEventListener('DOMContentLoaded', () => {
