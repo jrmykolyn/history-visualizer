@@ -10,6 +10,9 @@ const Actions = require('./actions');
 ((window) => {
   const __ = window.__HISTORY_VISUALIZER__ = window.__HISTORY_VISUALIZER__ || {};
   __.count = 0;
+  __.originalBack = window.history.back;
+  __.originalForward = window.history.forward;
+  __.originalGo = window.history.go;
   __.originalPushState = window.history.pushState;
   __.originalReplaceState = window.history.replaceState;
   __.store = redux.createStore(rootReducer);
@@ -63,16 +66,31 @@ const Actions = require('./actions');
     window.addEventListener('popstate', __.onPop);
 
     // Monkey-patch
+    window.history.back = __.back;
+    window.history.forward = __.forward;
+    window.history.go = __.go;
     window.history.pushState = __.pushState;
     window.history.replaceState = __.replaceState;
 
     // Mount
     ReactDOM.render(
       <Provider store={__.store}>
-        <App />
+        <App api={ __ }/>
       </Provider>,
       this.utils.getOrCreateStackElem()
     );
+  }
+
+  __.back = function back() {
+    __.originalBack.call(window.history);
+  }
+
+  __.forward = function forward() {
+    __.originalForward.call(window.history);
+  }
+
+  __.go = function go(n) {
+    __.originalGo.call(window.history, n);
   }
 
   __.onPop = function onPop(e) {
