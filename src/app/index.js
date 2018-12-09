@@ -5,7 +5,7 @@ const { default: Stack } = require('./components/stack/Stack');
 
 export class App extends React.Component {
   render() {
-   return (<Stack />);
+    return (<Stack api={ this.props.api } />);
   }
 }
 
