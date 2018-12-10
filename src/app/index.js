@@ -9,8 +9,4 @@ export class App extends React.Component {
   }
 }
 
-const mapStateToProps = (state) => ({ frames: state.frames });
-
-const mapDispatchToProps = () => ({ addFrame, selectFrame });
-
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default connect()(App);

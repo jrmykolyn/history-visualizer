@@ -1,11 +1,16 @@
 const redux = require('redux');
 
 const INITIAL_STATE = {
-  entries: [],
-  current: 0,
+  frames: {
+    entries: [],
+    current: 0,
+  },
+  ui: {
+    isOpen: false,
+  },
 };
 
-export const frames = (state = INITIAL_STATE, action) => {
+export const frames = (state = INITIAL_STATE.frames, action) => {
   switch (action.type) {
     case 'ADD_FRAME': return { ...state, entries: [action.payload, ...state.entries.filter(entry => entry.count < action.payload.count)], current: 0 };
     case 'SELECT_FRAME':
@@ -18,4 +23,12 @@ export const frames = (state = INITIAL_STATE, action) => {
   }
 };
 
-export default redux.combineReducers({ frames });
+export const ui = (state = INITIAL_STATE.ui, action) => {
+  console.log(action); // TEMP
+  switch (action.type) {
+    case 'TOGGLE_DRAWER': return { ...state, isOpen: !state.isOpen };
+    default: return state;
+  }
+};
+
+export default redux.combineReducers({ frames, ui });

@@ -38,6 +38,23 @@ const Actions = require('./actions');
       left: 0;
       box-shadow: 0 3px 20px -5px rgba(0, 0, 0, 0.15);
       z-index: 999999;
+      transform: translateX(-100%);
+      transition: transform 0.15s;
+    }
+
+    .stack.is-active {
+      transform: translateX(0);
+    }
+
+    .stack button {
+      width: 50px;
+      height: 50px;
+      background$: #fff;
+      border: none;
+      box-shadow: 0 3px 20px -5px rgba(0, 0, 0, 0.15);
+      position: absolute;
+      top: 20px;
+      left: 100%;
     }
 
     pre {
@@ -77,7 +94,7 @@ const Actions = require('./actions');
       <Provider store={__.store}>
         <App api={ __ }/>
       </Provider>,
-      this.utils.getOrCreateStackElem()
+      this.utils.getOrCreateRootElem()
     );
   }
 
@@ -120,19 +137,19 @@ const Actions = require('./actions');
     return `.${className}`;
   }
 
-  __.utils.getOrCreateStackElem = function getOrCreateStackElem() {
-    if (!__.elems.stackElem) {
+  __.utils.getOrCreateRootElem = function getOrCreateRootElem() {
+    if (!__.elems.rootElem) {
       const node = document.createElement('section');
-      node.classList.add(__.utils.getStackClass());
+      node.classList.add(__.utils.getRootClass());
       document.body.appendChild(node);
-      __.elems.stackElem = node;
+      __.elems.rootElem = node;
     }
 
-    return __.elems.stackElem;
+    return __.elems.rootElem;
   }
 
-  __.utils.getStackClass = function getStackClass(asSelector) {
-    const identifier = 'stack';
+  __.utils.getRootClass = function getRootClass(asSelector) {
+    const identifier = 'root';
     return asSelector
       ? __.utils.getClassAsSelector(identifier)
       : identifier;

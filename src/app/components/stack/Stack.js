@@ -1,22 +1,27 @@
 const React = require('react');
 const { connect } = require('react-redux');
 const { default: Frame } = require('../frame/Frame');
+const { toggleDrawer } = require('../../../actions');
 
 export class Stack extends React.Component {
   constructor() {
     super();
 
     this.onFrameClick = this.onFrameClick.bind(this);
+    this.onToggleClick = this.onToggleClick.bind(this);
   }
 
   render() {
     return (
-      <div>
-      {
-        this.props.frames.entries.length
-          ? this.props.frames.entries.map((frame, i) => <Frame frame={frame} isActive={i === this.props.frames.current} onClick={ () => this.onFrameClick(i) }/>)
-          : ''
-      }
+      <div className={ this.props.ui.isOpen ? 'stack is-active' : 'stack' }>
+        <div>
+        {
+          this.props.frames.entries.length
+            ? this.props.frames.entries.map((frame, i) => <Frame frame={frame} isActive={i === this.props.frames.current} onClick={ () => this.onFrameClick(i) }/>)
+            : ''
+        }
+        </div>
+        <button onClick={ this.onToggleClick }></button>
       </div>
     );
   }
@@ -24,8 +29,18 @@ export class Stack extends React.Component {
   onFrameClick(n) {
     this.props.api.go(this.props.frames.current - n);
   }
+
+  onToggleClick(e) {
+    e.preventDefault();
+    this.props.toggleDrawer();
+  }
 }
 
-const mapStateToProps = (state) => ({ frames: state.frames });
+const mapStateToProps = (state) => ({ frames: state.frames, ui: state.ui });
 
-export default connect(mapStateToProps, {})(Stack);
+const mapDispatchToProps = (dispatch) => ({
+  // TODO: Figure out why returning a plain object does not dispatch.
+  toggleDrawer: (...args) => dispatch(toggleDrawer(...args)),
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(Stack);
