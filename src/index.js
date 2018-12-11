@@ -26,53 +26,107 @@ const Actions = require('./actions');
     // Inject styles
     const styleElem = document.createElement('style');
     const styles = `
-    .stack {
+    .ui {
       width: 90%;
-      max-width: 500px;
+      max-width: 360px;
       height: 100%;
       display: block;
-      padding: 20px;
-      background: #fff;
+      color: #444;
+      box-shadow: 3px 0px 30px 5px rgba(0, 0, 0, 0.15);
       position: fixed;
       top: 0;
       left: 0;
-      box-shadow: 0 3px 20px -5px rgba(0, 0, 0, 0.15);
       z-index: 999999;
       transform: translateX(-100%);
       transition: transform 0.15s;
+      font-family: Helvetica, sans-serif;
+      font-size: 14px;
+      font-weight: 500;
     }
 
-    .stack.is-active {
+    .ui.is-active {
       transform: translateX(0);
     }
 
-    .stack button {
+    .ui a {
+      color: #0984e3;
+    }
+
+    .ui button {
       width: 50px;
       height: 50px;
       background$: #fff;
       border: none;
-      box-shadow: 0 3px 20px -5px rgba(0, 0, 0, 0.15);
+      box-shadow: 0 3px 20px -5px rgba(0, 0, 0, 0.05);
       position: absolute;
       top: 20px;
       left: 100%;
     }
 
-    pre {
+    .ui .stack {
+      width: 100%;
+      height: 100%;
+      padding: 12px;
+      background: #fff;
+      box-shadow: 3px 0px 20px 2px rgba(0, 0, 0, 0.05);
+      position: absolute;
+      top: 0;
+      left: 0;
+      overflow: auto;
+      z-index: 1;
+    }
+
+    .ui .frame {
+      padding: 15px;
+      border-left: 6px solid transparent;
+      background: #fff;
+      box-shadow: 0 3px 20px -5px rgba(0, 0, 0, 0.25);
+    }
+
+    .ui .frame:not(:last-child) {
+      margin-bottom: 10px;
+    }
+
+    .ui .frame.is-active {
+      border-left-color: #2ed573;
+    }
+
+    .frame__meta {
+      margin-bottom: 10px;
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+    }
+
+    .frame__meta p {
+      margin: 0;
+    }
+
+    .frame__meta p:not(:last-child) {
+      margin-right: 20px;
+    }
+
+    .frame__payload {
       color: #aaa;
       background: rgba(0, 0, 0, 0.03);
       border: solid 1px #aaa;
       padding: 10px;
+      padding-bottom: 8px;
       margin: 0;
+      font-size: 12px;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      white-space: nowrap;
     }
 
-    pre:not(:last-child) {
+    .frame__payload:not(:last-child) {
       margin-bottom: 10px;
     }
 
-    pre.is-active {
-      color: limegreen;
-      background: rgba(50, 205, 50, 0.1);
-      border-color: limegreen;
+    .frame.is-active .frame__payload {
+      color: #2ed573;
+      border-color: #2ed573;
+      background-color: rgba(46, 213, 115, 0.2);
     }
     `;
 
@@ -125,7 +179,7 @@ const Actions = require('./actions');
     // Invoke `pushState`.
     __.originalPushState.apply(window.history, [enhancedState, title, url]);
 
-    __.store.dispatch(Actions.addFrame(enhancedState));
+    __.store.dispatch(Actions.addFrame({ title, url, state: enhancedState }));
   }
 
   __.replaceState = function replaceState(state, title, url) {

@@ -13,11 +13,11 @@ export class Stack extends React.Component {
 
   render() {
     return (
-      <div className={ this.props.ui.isOpen ? 'stack is-active' : 'stack' }>
-        <div>
+      <div className={ this.props.ui.isOpen ? 'ui is-active' : 'ui' }>
+        <div className="stack">
         {
           this.props.frames.entries.length
-            ? this.props.frames.entries.map((frame, i) => <Frame frame={frame} isActive={i === this.props.frames.current} onClick={ () => this.onFrameClick(i) }/>)
+            ? this.props.frames.entries.map((frame, i) => <Frame frame={frame} isActive={i === this.props.frames.current} onClick={ (e) => this.onFrameClick(e, i) }/>)
             : ''
         }
         </div>
@@ -26,7 +26,8 @@ export class Stack extends React.Component {
     );
   }
 
-  onFrameClick(n) {
+  onFrameClick(e, n) {
+    e.preventDefault();
     this.props.api.go(this.props.frames.current - n);
   }
 
