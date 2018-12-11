@@ -21,7 +21,9 @@ export class Stack extends React.Component {
             : ''
         }
         </div>
-        <button onClick={ this.onToggleClick }></button>
+        <button onClick={ this.onToggleClick }>
+          <span></span>
+        </button>
       </div>
     );
   }

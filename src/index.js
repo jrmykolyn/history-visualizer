@@ -44,6 +44,13 @@ const Actions = require('./actions');
       font-weight: 500;
     }
 
+    .ui,
+    .ui *,
+    .ui *::before,
+    .ui *::after {
+      box-sizing: border-box;
+    }
+
     .ui.is-active {
       transform: translateX(0);
     }
@@ -55,12 +62,42 @@ const Actions = require('./actions');
     .ui button {
       width: 50px;
       height: 50px;
-      background$: #fff;
+      background: #fff;
       border: none;
+      padding: 0;
       box-shadow: 0 3px 20px -5px rgba(0, 0, 0, 0.05);
       position: absolute;
       top: 20px;
       left: 100%;
+    }
+
+    .ui button span {
+      width: 60%;
+      height: 4px;
+      background: #2ed573;
+      position: absolute;
+      top: 50%;
+      left: 20%;
+      transform: translateY(-50%);
+    }
+
+    .ui button span::before,
+    .ui button span::after {
+      content: '';
+      display: block;
+      width: 100%;
+      height: 100%;
+      background: inherit;
+      position: absolute;
+      left: 0;
+    }
+
+    .ui button span::before {
+      top: -250%;
+    }
+
+    .ui button span::after {
+      bottom: -250%;
     }
 
     .ui .stack {
