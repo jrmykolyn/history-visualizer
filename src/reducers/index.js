@@ -18,13 +18,12 @@ export const frames = (state = INITIAL_STATE.frames, action) => {
       return {
         ...state,
         current: entry && typeof entry.index === 'number' ? entry.index : -1,
-      }
+      };
     default: return state;
   }
 };
 
 export const ui = (state = INITIAL_STATE.ui, action) => {
-  console.log(action); // TEMP
   switch (action.type) {
     case 'TOGGLE_DRAWER': return { ...state, isOpen: !state.isOpen };
     default: return state;

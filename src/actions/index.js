@@ -4,8 +4,8 @@ export const Actions = {
   TOGGLE_DRAWER: 'TOGGLE_DRAWER',
 };
 
-export const addFrame = (frame) => ({ type: Actions.ADD_FRAME, payload: frame });
+export const addFrame = frame => ({ type: Actions.ADD_FRAME, payload: frame });
 
-export const selectFrame = (n) => ({ type: Actions.SELECT_FRAME, payload: n });
+export const selectFrame = n => ({ type: Actions.SELECT_FRAME, payload: n });
 
 export const toggleDrawer = () => ({ type: Actions.TOGGLE_DRAWER });

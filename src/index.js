@@ -8,6 +8,7 @@ const { default: rootReducer } = require('./reducers');
 const Actions = require('./actions');
 
 ((window) => {
+  // eslint-disable-next-line
   const __ = window.__HISTORY_VISUALIZER__ = window.__HISTORY_VISUALIZER__ || {};
   __.count = 0;
   __.originalBack = window.history.back;
@@ -185,30 +186,30 @@ const Actions = require('./actions');
       <Provider store={__.store}>
         <App api={ __ }/>
       </Provider>,
-      this.utils.getOrCreateRootElem()
+      this.utils.getOrCreateRootElem(),
     );
-  }
+  };
 
   __.back = function back() {
     __.originalBack.call(window.history);
-  }
+  };
 
   __.forward = function forward() {
     __.originalForward.call(window.history);
-  }
+  };
 
   __.go = function go(n) {
     __.originalGo.call(window.history, n);
-  }
+  };
 
   __.onPop = function onPop(e) {
     __.store.dispatch(Actions.selectFrame(e.state.count));
     __.count = e.state.count;
-  }
+  };
 
   __.pushState = function pushState(state, title, url) {
     // Bump count.
-    __.count++;
+    __.count += 1;
 
     // Enhance state.
     const enhancedState = { ...state, count: __.count };
@@ -217,16 +218,16 @@ const Actions = require('./actions');
     __.originalPushState.apply(window.history, [enhancedState, title, url]);
 
     __.store.dispatch(Actions.addFrame({ title, url, state: enhancedState }));
-  }
+  };
 
   __.replaceState = function replaceState(state, title, url) {
     const enhancedState = { ...state, count: __.count };
     __.originalReplaceState.apply(window.history, [enhancedState, title, url]);
-  }
+  };
 
-  __.utils.getClassAsSelector = function(className) {
+  __.utils.getClassAsSelector = function getClassAsSelector(className) {
     return `.${className}`;
-  }
+  };
 
   __.utils.getOrCreateRootElem = function getOrCreateRootElem() {
     if (!__.elems.rootElem) {
@@ -237,14 +238,14 @@ const Actions = require('./actions');
     }
 
     return __.elems.rootElem;
-  }
+  };
 
   __.utils.getRootClass = function getRootClass(asSelector) {
     const identifier = 'root';
     return asSelector
       ? __.utils.getClassAsSelector(identifier)
       : identifier;
-  }
+  };
 
 
   // --------------------------------------------------
