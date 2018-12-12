@@ -9,14 +9,21 @@
   },
   "extends": "airbnb-base",
   "parserOptions": {
-    "sourceType": "module"
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "jsx": true
+    }
   },
+  "plugins": [
+    "react"
+  ],
   "rules": {
     "global-require": 0,
     "import/no-extraneous-dependencies": [ "error", {
       "devDependencies": ["src/test/**/*"]
     } ],
     "import/prefer-default-export": 0,
+    "import/no-named-as-default": 0,
     "prefer-destructuring": 0,
     "max-len": [ "error", {
       "code": 250
@@ -29,6 +36,8 @@
     "no-case-declarations": 0,
     "no-debugger": 1,
     "semi": 1,
-    "no-trailing-spaces": 1
+    "no-trailing-spaces": 1,
+    "react/jsx-uses-react": 1,
+    "react/jsx-uses-vars": 1
   }
 }
