@@ -1,4 +1,4 @@
-const redux = require('redux');
+import { combineReducers } from 'redux';
 
 const INITIAL_STATE = {
   frames: {
@@ -30,4 +30,4 @@ export const ui = (state = INITIAL_STATE.ui, action) => {
   }
 };
 
-export default redux.combineReducers({ frames, ui });
+export default combineReducers({ frames, ui });

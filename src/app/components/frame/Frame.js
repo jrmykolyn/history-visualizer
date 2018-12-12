@@ -1,4 +1,4 @@
-const React = require('react');
+import React from 'react';
 
 export const Frame = ({ frame, isActive, onClick }) => (
   <div className={ isActive ? 'frame is-active' : 'frame' }>

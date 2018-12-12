@@ -1,7 +1,7 @@
-const React = require('react');
-const { connect } = require('react-redux');
-const { default: Frame } = require('../frame/Frame');
-const { toggleDrawer } = require('../../../actions');
+import React from 'react';
+import { connect } from 'react-redux';
+import { Frame } from '../frame/Frame';
+import { toggleDrawer } from '../../../actions';
 
 export class Stack extends React.Component {
   constructor() {

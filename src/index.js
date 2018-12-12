@@ -1,11 +1,11 @@
-const React = require('react');
-const ReactDOM = require('react-dom');
-const { Provider } = require('react-redux');
-const redux = require('redux');
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { Provider } from 'react-redux';
+import { createStore } from 'redux';
 
-const { default: App } = require('./app');
-const { default: rootReducer } = require('./reducers');
-const Actions = require('./actions');
+import * as Actions from './actions';
+import App from './app';
+import rootReducer from './reducers';
 
 ((window) => {
   // eslint-disable-next-line
@@ -16,7 +16,7 @@ const Actions = require('./actions');
   __.originalGo = window.history.go;
   __.originalPushState = window.history.pushState;
   __.originalReplaceState = window.history.replaceState;
-  __.store = redux.createStore(rootReducer);
+  __.store = createStore(rootReducer);
   __.elems = {};
   __.utils = {};
 

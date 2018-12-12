@@ -1,6 +1,6 @@
-const React = require('react');
-const { connect } = require('react-redux');
-const { default: Stack } = require('./components/stack/Stack');
+import React from 'react';
+import { connect } from 'react-redux';
+import Stack from './components/stack/Stack';
 
 export class App extends React.Component {
   render() {
