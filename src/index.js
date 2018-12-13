@@ -5,6 +5,7 @@ import { createStore } from 'redux';
 
 import { ActionCreators } from './state/actions';
 import App from './app';
+import { COUNT_KEY } from './config';
 import rootReducer from './state/reducers';
 
 ((window) => {
@@ -266,8 +267,9 @@ import rootReducer from './state/reducers';
   };
 
   __.onPop = function onPop(e) {
-    __.store.dispatch(ActionCreators.selectFrame(e.state.count));
-    __.count = e.state.count;
+    const count = e.state[COUNT_KEY];
+    __.store.dispatch(ActionCreators.selectFrame(count));
+    __.count = count;
   };
 
   __.pushState = function pushState(state, title, url) {
@@ -275,7 +277,7 @@ import rootReducer from './state/reducers';
     __.count += 1;
 
     // Enhance state.
-    const enhancedState = { ...state, count: __.count };
+    const enhancedState = { ...state, [COUNT_KEY]: __.count };
 
     // Invoke `pushState`.
     __.originalPushState.apply(window.history, [enhancedState, title, url]);
@@ -284,7 +286,7 @@ import rootReducer from './state/reducers';
   };
 
   __.replaceState = function replaceState(state, title, url) {
-    const enhancedState = { ...state, count: __.count };
+    const enhancedState = { ...state, [COUNT_KEY]: __.count };
     __.originalReplaceState.apply(window.history, [enhancedState, title, url]);
   };
 
