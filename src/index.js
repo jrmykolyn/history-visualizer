@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
 
-import * as Actions from './actions';
+import { ActionCreators } from './actions';
 import App from './app';
 import rootReducer from './reducers';
 
@@ -266,7 +266,7 @@ import rootReducer from './reducers';
   };
 
   __.onPop = function onPop(e) {
-    __.store.dispatch(Actions.selectFrame(e.state.count));
+    __.store.dispatch(ActionCreators.selectFrame(e.state.count));
     __.count = e.state.count;
   };
 
@@ -280,7 +280,7 @@ import rootReducer from './reducers';
     // Invoke `pushState`.
     __.originalPushState.apply(window.history, [enhancedState, title, url]);
 
-    __.store.dispatch(Actions.addFrame({ title, url, state: enhancedState }));
+    __.store.dispatch(ActionCreators.addFrame({ title, url, state: enhancedState }));
   };
 
   __.replaceState = function replaceState(state, title, url) {

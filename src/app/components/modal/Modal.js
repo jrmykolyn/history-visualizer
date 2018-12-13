@@ -1,6 +1,6 @@
 const React = require('react');
 const { connect } = require('react-redux');
-const { toggleModal } = require('../../../actions');
+const { ActionCreators } = require('../../../actions');
 
 export class Modal extends React.Component {
   render() {
@@ -16,7 +16,7 @@ export class Modal extends React.Component {
 }
 
 const mapDispatchToProps = dispatch => ({
-  toggleModal: () => dispatch(toggleModal()),
+  toggleModal: () => dispatch(ActionCreators.toggleModal()),
 });
 
 const mapStateToProps = state => ({
