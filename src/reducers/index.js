@@ -7,6 +7,8 @@ const INITIAL_STATE = {
   },
   ui: {
     isOpen: false,
+    modalIsOpen: false,
+    modalSelectedEntry: 0,
   },
 };
 
@@ -26,6 +28,7 @@ export const frames = (state = INITIAL_STATE.frames, action) => {
 export const ui = (state = INITIAL_STATE.ui, action) => {
   switch (action.type) {
     case 'TOGGLE_DRAWER': return { ...state, isOpen: !state.isOpen };
+    case 'TOGGLE_MODAL': return { ...state, modalIsOpen: !state.modalIsOpen, modalSelectedEntry: action.payload || 0 };
     default: return state;
   }
 };

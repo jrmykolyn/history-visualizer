@@ -37,7 +37,7 @@ import rootReducer from './reducers';
       position: fixed;
       top: 0;
       left: 0;
-      z-index: 999999;
+      z-index: 1000;
       transform: translateX(-100%);
       transition: transform 0.15s;
       font-family: Helvetica, sans-serif;
@@ -146,7 +146,7 @@ import rootReducer from './reducers';
 
     .frame__payload {
       color: #aaa;
-      background: rgba(0, 0, 0, 0.03);
+      background-color: rgba(0, 0, 0, 0.03);
       border: solid 1px #aaa;
       padding: 10px;
       padding-bottom: 8px;
@@ -155,6 +155,12 @@ import rootReducer from './reducers';
       text-overflow: ellipsis;
       overflow: hidden;
       white-space: nowrap;
+      cursor: pointer;
+      transition: background-color 0.15s;
+    }
+
+    .frame__payload:hover {
+      background-color: rgba(0, 0, 0, 0.06);
     }
 
     .frame__payload:not(:last-child) {
@@ -165,6 +171,63 @@ import rootReducer from './reducers';
       color: #2ed573;
       border-color: #2ed573;
       background-color: rgba(46, 213, 115, 0.2);
+    }
+
+    .frame.is-active .frame__payload:hover {
+      background-color: rgba(46, 213, 115, 0.25);
+    }
+
+    .modal-wrapper {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 0;
+      height: 0;
+      z-index: 1000;
+      opacity: 0;
+      transition: opacity 0.15s 0s, width 0s 0.1s, height 0s 0.1s;
+      overflow: hidden;
+    }
+
+    .modal-wrapper.is-active {
+      width: 100%;
+      height: 100%;
+      opacity: 1;
+      transition: opacity 0.15s 0s, width 0s 0s, height 0s 0s;
+    }
+
+    .modal-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(10, 10, 10, 0.85);
+    }
+
+    .modal {
+      width: 90%;
+      max-width: 600px;
+      height: 90%;
+      max-height: 800px;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: #fff;
+      box-shadow: 0px 5px 30px -5px rgba(0, 0, 0, 0.15);
+      padding: 30px;
+    }
+
+    .modal pre {
+      max-height: 100%;
+      overflow: auto;
+      color: #888;
+      background: rgba(0, 0, 0, 0.03);
+      border: solid 1px #aaa;
+      font-size: 12px;
+      padding: 20px;
+      margin: 0;
     }
     `;
 

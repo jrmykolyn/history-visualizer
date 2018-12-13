@@ -1,7 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Frame } from '../frame/Frame';
-import { toggleDrawer } from '../../../actions';
+import {
+  toggleDrawer,
+  toggleModal,
+} from '../../../actions';
 
 export class Stack extends React.Component {
   constructor() {
@@ -17,7 +20,7 @@ export class Stack extends React.Component {
         <div className="stack">
         {
           this.props.frames.entries.length
-            ? this.props.frames.entries.map((frame, i) => <Frame frame={frame} isActive={i === this.props.frames.current} onClick={ e => this.onFrameClick(e, i) }/>)
+            ? this.props.frames.entries.map((frame, i) => <Frame frame={frame} isActive={i === this.props.frames.current} onClick={ (e) => this.onFrameClick(e, i) } onEntryClick={ () => this.props.toggleModal(i) } />)
             : ''
         }
         </div>
@@ -44,6 +47,7 @@ const mapStateToProps = state => ({ frames: state.frames, ui: state.ui });
 const mapDispatchToProps = dispatch => ({
   // TODO: Figure out why returning a plain object does not dispatch.
   toggleDrawer: (...args) => dispatch(toggleDrawer(...args)),
+  toggleModal: (...args) => dispatch(toggleModal(...args)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Stack);
