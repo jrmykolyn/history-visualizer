@@ -1,4 +1,5 @@
 import { combineReducers } from 'redux';
+import { Actions } from '../actions';
 
 const INITIAL_STATE = {
   frames: {
@@ -18,8 +19,8 @@ const INITIAL_STATE = {
 
 export const frames = (state = INITIAL_STATE.frames, action) => {
   switch (action.type) {
-    case 'ADD_FRAME': return { ...state, entries: [action.payload, ...state.entries.filter(e => e.state.count < action.payload.state.count)], current: 0 };
-    case 'SELECT_FRAME':
+    case Actions.ADD_FRAME: return { ...state, entries: [action.payload, ...state.entries.filter(e => e.state.count < action.payload.state.count)], current: 0 };
+    case Actions.SELECT_FRAME:
       const entry = state.entries.map((e, i) => ({ ...e, index: i })).filter(e => e.state.count === action.payload)[0];
       return {
         ...state,
@@ -31,8 +32,8 @@ export const frames = (state = INITIAL_STATE.frames, action) => {
 
 export const ui = (state = INITIAL_STATE.ui, action) => {
   switch (action.type) {
-    case 'TOGGLE_DRAWER': return { ...state, drawer: { ...state.drawer, isOpen: !state.drawer.isOpen } };
-    case 'TOGGLE_MODAL': return { ...state, modal: { ...state.modal, isOpen: !state.modal.isOpen, selectedEntry: action.payload || 0 } };
+    case Actions.TOGGLE_DRAWER: return { ...state, drawer: { ...state.drawer, isOpen: !state.drawer.isOpen } };
+    case Actions.TOGGLE_MODAL: return { ...state, modal: { ...state.modal, isOpen: !state.modal.isOpen, selectedEntry: action.payload || 0 } };
     default: return state;
   }
 };
