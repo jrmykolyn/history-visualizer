@@ -16,7 +16,7 @@ export class Stack extends React.Component {
 
   render() {
     return (
-      <div className={ this.props.ui.isOpen ? 'ui is-active' : 'ui' }>
+      <div className={ this.props.drawer.isOpen ? 'ui is-active' : 'ui' }>
         <div className="stack">
         {
           this.props.frames.entries.length
@@ -42,7 +42,7 @@ export class Stack extends React.Component {
   }
 }
 
-const mapStateToProps = state => ({ frames: state.frames, ui: state.ui });
+const mapStateToProps = state => ({ frames: state.frames, drawer: state.ui.drawer });
 
 const mapDispatchToProps = dispatch => ({
   // TODO: Figure out why returning a plain object does not dispatch.

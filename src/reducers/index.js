@@ -6,9 +6,13 @@ const INITIAL_STATE = {
     current: 0,
   },
   ui: {
-    isOpen: false,
-    modalIsOpen: false,
-    modalSelectedEntry: 0,
+    drawer: {
+      isOpen: false,
+    },
+    modal: {
+      isOpen: false,
+      selectedEntry: 0,
+    },
   },
 };
 
@@ -27,8 +31,8 @@ export const frames = (state = INITIAL_STATE.frames, action) => {
 
 export const ui = (state = INITIAL_STATE.ui, action) => {
   switch (action.type) {
-    case 'TOGGLE_DRAWER': return { ...state, isOpen: !state.isOpen };
-    case 'TOGGLE_MODAL': return { ...state, modalIsOpen: !state.modalIsOpen, modalSelectedEntry: action.payload || 0 };
+    case 'TOGGLE_DRAWER': return { ...state, drawer: { ...state.drawer, isOpen: !state.drawer.isOpen } };
+    case 'TOGGLE_MODAL': return { ...state, modal: { ...state.modal, isOpen: !state.modal.isOpen, selectedEntry: action.payload || 0 } };
     default: return state;
   }
 };

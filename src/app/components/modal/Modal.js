@@ -21,9 +21,9 @@ const mapDispatchToProps = (dispatch) => ({
 
 const mapStateToProps = (state) => {
   return ({
-    selected: state.frames.entries[state.ui.modalSelectedEntry],
-    isOpen: state.ui.modalIsOpen,
-    index: state.ui.modalSelectedEntry,
+    selected: state.frames.entries[state.ui.modal.selectedEntry],
+    isOpen: state.ui.modal.isOpen,
+    index: state.ui.modal.selectedEntry,
   });
 }
 
