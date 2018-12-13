@@ -3,9 +3,9 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
 
-import { ActionCreators } from './actions';
+import { ActionCreators } from './state/actions';
 import App from './app';
-import rootReducer from './reducers';
+import rootReducer from './state/reducers';
 
 ((window) => {
   // eslint-disable-next-line
