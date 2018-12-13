@@ -314,5 +314,7 @@ import rootReducer from './state/reducers';
   // --------------------------------------------------
   // INIT
   // --------------------------------------------------
-  __.init();
+  window.addEventListener('DOMContentLoaded', () => {
+    __.init();
+  });
 })(window);
