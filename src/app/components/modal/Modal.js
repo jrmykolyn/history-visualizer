@@ -15,16 +15,14 @@ export class Modal extends React.Component {
   }
 }
 
-const mapDispatchToProps = (dispatch) => ({
+const mapDispatchToProps = dispatch => ({
   toggleModal: () => dispatch(toggleModal()),
 });
 
-const mapStateToProps = (state) => {
-  return ({
-    selected: state.frames.entries[state.ui.modal.selectedEntry],
-    isOpen: state.ui.modal.isOpen,
-    index: state.ui.modal.selectedEntry,
-  });
-}
+const mapStateToProps = state => ({
+  selected: state.frames.entries[state.ui.modal.selectedEntry],
+  isOpen: state.ui.modal.isOpen,
+  index: state.ui.modal.selectedEntry,
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(Modal);

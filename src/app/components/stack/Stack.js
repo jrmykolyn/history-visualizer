@@ -20,7 +20,7 @@ export class Stack extends React.Component {
         <div className="stack">
         {
           this.props.frames.entries.length
-            ? this.props.frames.entries.map((frame, i) => <Frame frame={frame} isActive={i === this.props.frames.current} onClick={ (e) => this.onFrameClick(e, i) } onEntryClick={ () => this.props.toggleModal(i) } />)
+            ? this.props.frames.entries.map((frame, i) => <Frame frame={frame} isActive={i === this.props.frames.current} onClick={ e => this.onFrameClick(e, i) } onEntryClick={ () => this.props.toggleModal(i) } />)
             : ''
         }
         </div>

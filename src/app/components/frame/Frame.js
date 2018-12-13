@@ -1,6 +1,8 @@
 import React from 'react';
 
-export const Frame = ({ frame, isActive, onClick, onEntryClick }) => (
+export const Frame = ({
+  frame, isActive, onClick, onEntryClick,
+}) => (
   <div className={ isActive ? 'frame is-active' : 'frame' }>
     <div className="frame__meta">
       <p><a href="#" onClick={ onClick }>{ frame.url }</a></p>

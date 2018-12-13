@@ -11,4 +11,4 @@ export const selectFrame = n => ({ type: Actions.SELECT_FRAME, payload: n });
 
 export const toggleDrawer = () => ({ type: Actions.TOGGLE_DRAWER });
 
-export const toggleModal = (n) => ({ type: Actions.TOGGLE_MODAL, payload: n });
+export const toggleModal = n => ({ type: Actions.TOGGLE_MODAL, payload: n });
