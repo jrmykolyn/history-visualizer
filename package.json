@@ -4,8 +4,8 @@
   "description": "History Visualizer is a tool for recording, inspecting, and traversing browser history.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack --mode=production",
+    "ext:build": "node ./scripts/ext/build.js",
     "lint:scripts": "eslint ./src/",
     "lint:scripts:fix": "eslint --fix ./src/"
   },
