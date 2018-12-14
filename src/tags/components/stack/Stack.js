@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Frame } from '..';
+import './index.css';
 import { ActionCreators } from '../../../state/actions';
 
 export class Stack extends React.Component {

@@ -1,0 +1,52 @@
+.hv .modal-wrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 0;
+  z-index: 1000;
+  opacity: 0;
+  transition: opacity 0.15s 0s, width 0s 0.1s, height 0s 0.1s;
+  overflow: hidden;
+}
+
+.hv .modal-wrapper.is-active {
+  width: 100%;
+  height: 100%;
+  opacity: 1;
+  transition: opacity 0.15s 0s, width 0s 0s, height 0s 0s;
+}
+
+.hv .modal-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(10, 10, 10, 0.85);
+}
+
+.hv .modal {
+  width: 90%;
+  max-width: 600px;
+  height: 90%;
+  max-height: 800px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #fff;
+  box-shadow: 0px 5px 30px -5px rgba(0, 0, 0, 0.15);
+  padding: 30px;
+}
+
+.hv .modal pre {
+  max-height: 100%;
+  overflow: auto;
+  color: #888;
+  background: rgba(0, 0, 0, 0.03);
+  border: solid 1px #aaa;
+  font-size: 12px;
+  padding: 20px;
+  margin: 0;
+}

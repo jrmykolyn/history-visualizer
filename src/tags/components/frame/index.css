@@ -1,0 +1,62 @@
+.hv .frame {
+  padding: 15px;
+  border-left: 6px solid transparent;
+  background: #fff;
+  box-shadow: 0 3px 20px -5px rgba(0, 0, 0, 0.25);
+}
+
+.hv .frame:not(:last-child) {
+  margin-bottom: 10px;
+}
+
+.hv .frame.is-active {
+  border-left-color: #2ed573;
+}
+
+.hv .frame__meta {
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.hv .frame__meta p {
+  margin: 0;
+}
+
+.hv .frame__meta p:not(:last-child) {
+  margin-right: 20px;
+}
+
+.hv .frame__payload {
+  color: #aaa;
+  background-color: rgba(0, 0, 0, 0.03);
+  border: solid 1px #aaa;
+  padding: 10px;
+  padding-bottom: 8px;
+  margin: 0;
+  font-size: 12px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background-color 0.15s;
+}
+
+.hv .frame__payload:hover {
+  background-color: rgba(0, 0, 0, 0.06);
+}
+
+.hv .frame__payload:not(:last-child) {
+  margin-bottom: 10px;
+}
+
+.hv .frame.is-active .frame__payload {
+  color: #2ed573;
+  border-color: #2ed573;
+  background-color: rgba(46, 213, 115, 0.2);
+}
+
+.hv .frame.is-active .frame__payload:hover {
+  background-color: rgba(46, 213, 115, 0.25);
+}

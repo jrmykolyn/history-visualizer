@@ -1,0 +1,86 @@
+.hv .ui {
+  width: 90%;
+  max-width: 360px;
+  height: 100%;
+  display: block;
+  color: #444;
+  box-shadow: 3px 0px 30px 5px rgba(0, 0, 0, 0.15);
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  transform: translateX(-100%);
+  transition: transform 0.15s;
+  font-family: Helvetica, sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.hv .ui,
+.hv .ui *,
+.hv .ui *::before,
+.hv .ui *::after {
+  box-sizing: border-box;
+}
+
+.hv .ui.is-active {
+  transform: translateX(0);
+}
+
+.hv .ui a {
+  color: #0984e3;
+}
+
+.hv .ui button {
+  width: 50px;
+  height: 50px;
+  background: #fff;
+  border: none;
+  padding: 0;
+  box-shadow: 0 3px 20px -5px rgba(0, 0, 0, 0.05);
+  position: absolute;
+  top: 20px;
+  left: 100%;
+}
+
+.hv .ui button span {
+  width: 60%;
+  height: 4px;
+  background: #2ed573;
+  position: absolute;
+  top: 50%;
+  left: 20%;
+  transform: translateY(-50%);
+}
+
+.hv .ui button span::before,
+.hv .ui button span::after {
+  content: '';
+  display: block;
+  width: 100%;
+  height: 100%;
+  background: inherit;
+  position: absolute;
+  left: 0;
+}
+
+.hv .ui button span::before {
+  top: -250%;
+}
+
+.hv .ui button span::after {
+  bottom: -250%;
+}
+
+.hv .stack {
+  width: 100%;
+  height: 100%;
+  padding: 12px;
+  background: #fff;
+  box-shadow: 3px 0px 20px 2px rgba(0, 0, 0, 0.05);
+  position: absolute;
+  top: 0;
+  left: 0;
+  overflow: auto;
+  z-index: 1;
+}
