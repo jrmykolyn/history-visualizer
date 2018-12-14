@@ -6,4 +6,4 @@ export {
   Frame,
   Modal,
   Stack,
-}
+};
