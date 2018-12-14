@@ -4,7 +4,7 @@ import { Provider } from 'react-redux';
 import { createStore } from 'redux';
 
 import { ActionCreators } from './state/actions';
-import App from './app';
+import App from './tags/app';
 import { COUNT_KEY } from './config';
 import rootReducer from './state/reducers';
 
