@@ -8,7 +8,7 @@ import App from './tags/app';
 import { COUNT_KEY } from './config';
 import rootReducer from './state/reducers';
 
-((window) => {
+((window, document) => {
   // eslint-disable-next-line
   const __ = window.__HISTORY_VISUALIZER__ = window.__HISTORY_VISUALIZER__ || {};
   __.count = 0;
@@ -106,7 +106,11 @@ import rootReducer from './state/reducers';
   // --------------------------------------------------
   // INIT
   // --------------------------------------------------
-  window.addEventListener('DOMContentLoaded', () => {
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', () => {
+      __.init();
+    });
+  } else {
     __.init();
-  });
-})(window);
+  }
+})(window, document);
