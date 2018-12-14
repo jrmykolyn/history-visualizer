@@ -1,1 +1,4 @@
 node_modules/
+
+# Prevent distribution file from being added to version control.
+ext/main.js

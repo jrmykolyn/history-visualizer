@@ -1,0 +1,20 @@
+{
+  "name": "History Visualizer",
+  "description": "History Visualizer is a tool for recording, inspecting, and traversing browser history.",
+  "version": "0.0.0",
+  "manifest_version": 2,
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "content.js"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "main.js"
+  ],
+  "author": "Jesse R Mykolyn"
+}
