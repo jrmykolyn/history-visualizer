@@ -1,11 +1,14 @@
 # History Visualizer
 
+![History Visualizer](https://raw.githubusercontent.com/jrmykolyn/history-visualizer/master/history-visualizer.gif)
+
 ## Table of Contents
 - [About](#about)
 - [Installation](#installation)
 - [Setup](#setup)
 - [Usage](#usage)
 - [Documentation](#documentation)
+- [Attribution](#attribution)
 
 ## About
 History Visualizer is a tool for recording, inspecting, and traversing browser history.
@@ -34,3 +37,7 @@ To view history for a given site or application, expand the History Visualizer '
 Currently, History Visualizer does not include any external documentation.
 
 For an overview of the project's evolution, please consult the CHANGELOG.
+
+## Attribution
+`README.md` gif: https://giphy.com/gifs/space-nasa-qjj4xrA1STjfa
+
