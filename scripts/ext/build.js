@@ -1,12 +1,10 @@
 #! /usr/bin/env node
 
-const fs = require('fs');
+const fs = require('fs-extra');
+const { CONFIG } = require('.');
 
 try {
-  const root = `${__dirname}/../..`;
-  const extPath = `${root}/ext`;
-  const distPath = `${root}/dist`;
-  const distFile = 'main.js';
+  const { distFile, distPath, extPath, rootPath } = CONFIG;
 
   if (!fs.existsSync(extPath)) throw new Error('Please ensure that the `ext/` directory exists.');
   if (!fs.existsSync(distPath)) throw new Error('Please ensure that the `dist/` directory exists.');
@@ -15,7 +13,7 @@ try {
 
   if (!fs.existsSync(manifestPath)) throw new Error('Please ensure that the `ext/` directory contains a `manifest.json` file.');
 
-  const pkg = require(`${root}/package.json`);
+  const pkg = require(`${rootPath}/package.json`);
   const manifestData = require(manifestPath);
 
   // UPDATE MANIFEST
