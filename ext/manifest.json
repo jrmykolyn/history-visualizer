@@ -1,7 +1,7 @@
 {
   "name": "History Visualizer",
   "description": "History Visualizer is a tool for recording, inspecting, and traversing browser history.",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "manifest_version": 2,
   "content_scripts": [
     {
