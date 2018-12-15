@@ -6,6 +6,7 @@
   "scripts": {
     "build": "webpack --mode=production",
     "ext:build": "node ./scripts/ext/build.js",
+    "ext:dist": "npm run ext:build && npm run ext:zip",
     "ext:zip": "node ./scripts/ext/zip.js",
     "lint:scripts": "eslint ./src/",
     "lint:scripts:fix": "eslint --fix ./src/"
