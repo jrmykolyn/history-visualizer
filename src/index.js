@@ -3,10 +3,14 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
 
-import { ActionCreators } from './state/actions';
+import {
+  Actions,
+  ActionCreators,
+  rootReducer,
+  Selectors,
+} from './state';
 import App from './tags/app';
 import { COUNT_KEY } from './config';
-import rootReducer from './state/reducers';
 
 ((window, document) => {
   // eslint-disable-next-line
