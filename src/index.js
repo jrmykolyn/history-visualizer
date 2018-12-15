@@ -61,7 +61,7 @@ import { COUNT_KEY } from './config';
 
   __.onPop = function onPop(e) {
     __.store.dispatch(ActionCreators.setCount(e.state[COUNT_KEY]));
-    __.store.dispatch(ActionCreators.selectFrame(__.store.getState().frames.count));
+    __.store.dispatch(ActionCreators.selectFrame(Selectors.count(__.store.getState())));
   };
 
   __.pushState = function pushState(state, title, url) {
@@ -69,7 +69,7 @@ import { COUNT_KEY } from './config';
     __.store.dispatch(ActionCreators.incrementCount());
 
     // Enhance state.
-    const enhancedState = { ...state, [COUNT_KEY]: __.store.getState().frames.count };
+    const enhancedState = { ...state, [COUNT_KEY]: Selectors.count(__.store.getState()) };
 
     // Invoke `pushState`.
     __.originalPushState.apply(window.history, [enhancedState, title, url]);
@@ -78,7 +78,7 @@ import { COUNT_KEY } from './config';
   };
 
   __.replaceState = function replaceState(state, title, url) {
-    const enhancedState = { ...state, [COUNT_KEY]: __.store.getState().frames.count };
+    const enhancedState = { ...state, [COUNT_KEY]: Selectors.count(__.store.getState()) };
     __.originalReplaceState.apply(window.history, [enhancedState, title, url]);
   };
 
