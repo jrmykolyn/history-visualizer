@@ -2,14 +2,22 @@
 
 const fs = require('fs');
 
-const root = `${__dirname}/../..`;
-const extPath = `${root}/ext`;
-const distPath = `${root}/dist`;
-const manifestPath = `${extPath}/manifest.json`;
-const pkg = require(`${root}/package.json`);
-const manifestData = require(manifestPath);
-
 try {
+  const root = `${__dirname}/../..`;
+  const extPath = `${root}/ext`;
+  const distPath = `${root}/dist`;
+  const distFile = 'main.js';
+
+  if (!fs.existsSync(extPath)) throw new Error('Please ensure that the `ext/` directory exists.');
+  if (!fs.existsSync(distPath)) throw new Error('Please ensure that the `dist/` directory exists.');
+
+  const manifestPath = `${extPath}/manifest.json`;
+
+  if (!fs.existsSync(manifestPath)) throw new Error('Please ensure that the `ext/` directory contains a `manifest.json` file.');
+
+  const pkg = require(`${root}/package.json`);
+  const manifestData = require(manifestPath);
+
   // UPDATE MANIFEST
   manifestData.author = pkg.author;
   manifestData.description = pkg.description;
@@ -19,7 +27,8 @@ try {
   fs.writeFileSync(manifestPath, JSON.stringify(manifestData, null, 2), { encoding: 'utf-8' });
 
   // MIGRATE MAIN SCRIPT
-  fs.copyFileSync(`${distPath}/main.js`, `${extPath}/main.js`);
+  if (!fs.existsSync(`${distPath}/${distFile}`)) throw new Error(`Please ensure that the \`dist\` directory contains a \`${distFile}\` file.`);
+  fs.copyFileSync(`${distPath}/${distFile}`, `${extPath}/${distFile}`);
 } catch (e) {
   console.log('Whoops, something went wrong!');
   console.log(e.message);
