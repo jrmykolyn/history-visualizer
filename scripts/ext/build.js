@@ -2,6 +2,8 @@
 
 const fs = require('fs-extra');
 const { CONFIG } = require('.');
+const ARGS = process.argv.slice(2);
+const [VERSION] = ARGS;
 
 try {
   const { distFile, distPath, extPath, rootPath } = CONFIG;
@@ -19,7 +21,8 @@ try {
   // UPDATE MANIFEST
   manifestData.author = pkg.author;
   manifestData.description = pkg.description;
-  manifestData.version = pkg.version;
+  if (!VERSION) console.log('No version provided. Extracting version from `package.json`.');
+  manifestData.version = VERSION || pkg.version;
 
   // WRITE MANIFEST
   fs.writeFileSync(manifestPath, JSON.stringify(manifestData, null, 2), { encoding: 'utf-8' });
