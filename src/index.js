@@ -11,7 +11,6 @@ import rootReducer from './state/reducers';
 ((window, document) => {
   // eslint-disable-next-line
   const __ = window.__HISTORY_VISUALIZER__ = window.__HISTORY_VISUALIZER__ || {};
-  __.count = 0;
   __.originalBack = window.history.back;
   __.originalForward = window.history.forward;
   __.originalGo = window.history.go;
@@ -57,17 +56,16 @@ import rootReducer from './state/reducers';
   };
 
   __.onPop = function onPop(e) {
-    const count = e.state[COUNT_KEY];
-    __.store.dispatch(ActionCreators.selectFrame(count));
-    __.count = count;
+    __.store.dispatch(ActionCreators.setCount(e.state[COUNT_KEY]));
+    __.store.dispatch(ActionCreators.selectFrame(__.store.getState().frames.count));
   };
 
   __.pushState = function pushState(state, title, url) {
     // Bump count.
-    __.count += 1;
+    __.store.dispatch(ActionCreators.incrementCount());
 
     // Enhance state.
-    const enhancedState = { ...state, [COUNT_KEY]: __.count };
+    const enhancedState = { ...state, [COUNT_KEY]: __.store.getState().frames.count };
 
     // Invoke `pushState`.
     __.originalPushState.apply(window.history, [enhancedState, title, url]);
@@ -76,7 +74,7 @@ import rootReducer from './state/reducers';
   };
 
   __.replaceState = function replaceState(state, title, url) {
-    const enhancedState = { ...state, [COUNT_KEY]: __.count };
+    const enhancedState = { ...state, [COUNT_KEY]: __.store.getState().frames.count };
     __.originalReplaceState.apply(window.history, [enhancedState, title, url]);
   };
 
