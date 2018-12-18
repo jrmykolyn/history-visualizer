@@ -26,7 +26,25 @@ describe('Action creators', () => {
 
   describe('addFrame()', () => {
     it('should accept a payload', () => {
-      expect(Actions.addFrame('__FOO__')).to.eql({ type: Types.ADD_FRAME, payload: '__FOO__' });
+      expect(Actions.addFrame('__FOO__')).to.include({ payload: '__FOO__' });
+    });
+  });
+
+  describe('selectFrame()', () => {
+    it('should accept a payload', () => {
+      expect(Actions.selectFrame('__FOO__')).to.include({ payload: '__FOO__' });
+    });
+  });
+
+  describe('setCount', () => {
+    it('should accept a payload', () => {
+      expect(Actions.setCount('__FOO__')).to.include({ payload: '__FOO__' });
+    });
+  });
+
+  describe('toggleModal', () => {
+    it('should accept a payload', () => {
+      expect(Actions.toggleModal('__FOO__')).to.include({ payload: '__FOO__' });
     });
   });
 });
