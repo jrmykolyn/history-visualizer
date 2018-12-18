@@ -10,7 +10,8 @@
     "ext:zip": "node ./scripts/ext/zip.js",
     "lint:scripts": "eslint ./src/",
     "lint:scripts:fix": "eslint --fix ./src/",
-    "preversion": "node ./scripts/version/pre.js"
+    "preversion": "node ./scripts/version/pre.js",
+    "test": "mocha --require babel-core/register --recursive ./test"
   },
   "author": "Jesse R Mykolyn",
   "license": "ISC",
