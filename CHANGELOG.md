@@ -8,6 +8,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 ### Added
 - TEST: Added tests for action creators. [topic-11]
 - TEST: Added tests for reducers. [topic-12]
+- TEST: Added tests for selectors. [topic-13]
 
 ### Changed
 
