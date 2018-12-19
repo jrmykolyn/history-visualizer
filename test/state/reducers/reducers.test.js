@@ -84,4 +84,50 @@ describe('Reducers', () => {
       expect(frames(state, { type: 'AN_INVALID_ACTION' })).to.eq(state);
     });
   });
+
+  describe('ui()', () => {
+    it('should return the initial state', () => {
+      expect(ui(undefined, {})).to.eql({
+        drawer: {
+          isOpen: false,
+        },
+        modal: {
+          isOpen: false,
+          selectedEntry: 0,
+        },
+      });
+    });
+
+    it('should toggle the drawer', () => {
+      const state = {
+        drawer: {
+          isOpen: false,
+        },
+      };
+
+      expect(ui(state, { type: Actions.TOGGLE_DRAWER })).to.eql({ drawer: { isOpen: true } });
+    });
+
+    it('should toggle the modal', () => {
+      const state = {
+        modal: {
+          isOpen: false,
+          selectedEntry: 42,
+        },
+      };
+
+      expect(ui(state, { type: Actions.TOGGLE_MODAL, payload: 1 })).to.eql({
+        modal: {
+          isOpen: true,
+          selectedEntry: 1,
+        },
+      });
+    });
+
+    it('should return the state', () => {
+      const state = { foo: 'bar' };
+
+      expect(ui(state, { type: 'AN_INVALID_ACTION' })).to.eq(state);
+    });
+  });
 });
