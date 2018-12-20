@@ -9,6 +9,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 - TEST: Added tests for action creators. [topic-11]
 - TEST: Added tests for reducers. [topic-12]
 - TEST: Added tests for selectors. [topic-13]
+- TEST: Added tests for HistoryVisualizerUtils. [topic-15]
 
 ### Changed
 
