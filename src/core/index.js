@@ -28,11 +28,11 @@ export class HistoryVisualizer {
   }
 
   back() {
-    this.originalMethods.back.call(this.window);
+    this.originalMethods.back.call(this.window.history);
   }
 
   forward() {
-    this.originalMethods.forward.call(this.window);
+    this.originalMethods.forward.call(this.window.history);
   }
 
   go(n) {
