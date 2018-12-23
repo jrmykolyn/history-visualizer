@@ -254,6 +254,25 @@ describe('HistoryVisualizer', () => {
         expect(addFrameStub).to.be.calledWithExactly({ title, url, state: { ...state, __count__: count } });
       });
     });
+
+    describe('replaceState()', () => {
+      it('should enhance the state and invoke the original `replaceState` method', () => {
+        const count = 1;
+        const state = { foo: 'bar' };
+        const title = '';
+        const url = '/foo';
+        const replaceState = sinon.stub();
+        const countStub = sinon.stub(State.Selectors, 'count').returns(count);
+        instance.originalMethods = { replaceState };
+        instance.store = { getState: () => null };
+
+        instance.replaceState(state, title, url);
+
+        expect(replaceState).to.be.calledWithExactly({ ...state, __count__: count }, title, url);
+
+        countStub.restore();
+      });
+    });
   });
 
   describe('Instance properties', () => {
