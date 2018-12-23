@@ -2,6 +2,7 @@ import { it } from 'mocha';
 import chai, { expect } from 'chai';
 import sinon from 'sinon';
 import sinonChai from 'sinon-chai';
+import * as redux from 'redux';
 
 import { HistoryVisualizer } from '../../src/core';
 
@@ -81,9 +82,19 @@ describe('HistoryVisualizer', () => {
         expect(instance.elems).to.eq(elems);
       });
     });
+
+    describe('initStore()', () => {
+      it('should create a new application store', () => {
+        sinon.stub(redux, 'createStore').returns({ foo: 'bar' });
+        delete instance.store;
+
+        instance.initStore();
+
+        expect(instance.store).to.eql({ foo: 'bar' });
+      });
+    });
   });
 
   describe('Instance properties', () => {
   });
-
 });
