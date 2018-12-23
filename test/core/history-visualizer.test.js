@@ -168,6 +168,33 @@ describe('HistoryVisualizer', () => {
         expect(dispatch).to.be.calledWith({ type: 'bar', payload: count });
       });
     });
+
+    describe('patchApi()', () => {
+      it('should monkey patch the target API methods', () => {
+        const noop = () => null;
+        const targetMethods = {
+          back: noop,
+          forward: noop,
+          go: noop,
+          pushState: noop,
+          replaceState: noop,
+        };
+        const additionalMethods = {
+          foo: noop,
+          bar: noop,
+        };
+        // eslint-disable-next-line no-shadow
+        const api = {
+          ...targetMethods,
+          ...additionalMethods,
+        };
+
+        instance.patchApi(api);
+
+        expect(api).to.include(additionalMethods);
+        expect(api).to.not.include(targetMethods);
+      });
+    });
   });
 
   describe('Instance properties', () => {
