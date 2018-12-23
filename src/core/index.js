@@ -46,12 +46,7 @@ export class HistoryVisualizer {
     this.patchApi(this.options.api);
 
     // Mount
-    ReactDOM.render(
-      <Provider store={this.store}>
-        <App api={ this.api }/>
-      </Provider>,
-      this.utils.getOrCreateRootElem(this.elems),
-    );
+    this.initUi();
   }
 
   initElems(elems = {}) {
@@ -60,6 +55,15 @@ export class HistoryVisualizer {
 
   initStore() {
     this.store = createStore(rootReducer);
+  }
+
+  initUi() {
+    ReactDOM.render(
+      <Provider store={this.store}>
+        <App api={ this.api }/>
+      </Provider>,
+      this.utils.getOrCreateRootElem(this.elems),
+    );
   }
 
   ingestApi(api = {}) {
