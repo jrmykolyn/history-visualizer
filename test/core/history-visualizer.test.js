@@ -195,6 +195,65 @@ describe('HistoryVisualizer', () => {
         expect(api).to.not.include(targetMethods);
       });
     });
+
+    describe('pushState()', () => {
+      let dispatch;
+      let addFrameStub;
+      let incrementCountStub;
+      let countStub;
+
+      beforeEach(() => {
+        dispatch = sinon.spy();
+        addFrameStub = sinon.stub(State.ActionCreators, 'addFrame');
+        incrementCountStub = sinon.stub(State.ActionCreators, 'incrementCount')
+          .returns({ type: 'foo' });
+        countStub = sinon.stub(State.Selectors, 'count');
+        instance.store = {
+          dispatch,
+          getState: () => null,
+        };
+        instance.originalMethods = {
+          pushState: sinon.spy(),
+        };
+      });
+
+      afterEach(() => {
+        addFrameStub.restore();
+        incrementCountStub.restore();
+        countStub.restore();
+      });
+
+      it('should dispatch an increment count action', () => {
+        instance.pushState();
+
+        expect(incrementCountStub).to.be.called;
+        expect(dispatch).to.be.calledWith({ type: 'foo' });
+      });
+
+      it('should invoke the original `pushState` method with the enhanced state', () => {
+        const count = 1;
+        const state = { foo: 'bar' };
+        const title = '';
+        const url = '/foo';
+        countStub.returns(count);
+
+        instance.pushState(state, title, url);
+
+        expect(instance.originalMethods.pushState).to.be.calledWithExactly({ foo: 'bar', __count__: count }, title, url);
+      });
+
+      it('should dispatch an add frame action', () => {
+        const count = 1;
+        const state = { foo: 'bar' };
+        const title = '';
+        const url = '/far';
+        countStub.returns(count);
+
+        instance.pushState(state, title, url);
+
+        expect(addFrameStub).to.be.calledWithExactly({ title, url, state: { ...state, __count__: count } });
+      });
+    });
   });
 
   describe('Instance properties', () => {
