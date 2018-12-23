@@ -4,6 +4,7 @@ import sinon from 'sinon';
 import sinonChai from 'sinon-chai';
 import * as redux from 'redux';
 
+import * as State from '../../src/state';
 import { HistoryVisualizer } from '../../src/core';
 
 chai.use(sinonChai);
@@ -118,6 +119,53 @@ describe('HistoryVisualizer', () => {
         instance.ingestApi(api);
 
         expect(instance.originalMethods).to.eql(targetMethods);
+      });
+    });
+
+    describe('onPop()', () => {
+      let setCountStub;
+      let selectFrameStub;
+      let countStub;
+      let dispatch;
+
+      beforeEach(() => {
+        setCountStub = sinon.stub(State.ActionCreators, 'setCount');
+        selectFrameStub = sinon.stub(State.ActionCreators, 'selectFrame');
+        countStub = sinon.stub(State.Selectors, 'count');
+        dispatch = sinon.spy();
+        instance.store = {
+          dispatch,
+          getState: () => null,
+        };
+      });
+
+      afterEach(() => {
+        setCountStub.restore();
+        selectFrameStub.restore();
+        countStub.restore();
+      });
+
+      it('should dispatch the set count action with the correct payload', () => {
+        const count = 1;
+        const e = { state: { __count__: count } };
+        setCountStub.withArgs(count).returns({ type: 'foo', payload: count });
+
+        instance.onPop(e)
+
+        expect(setCountStub).to.be.calledWith(count);
+        expect(dispatch).to.be.calledWith({ type: 'foo', payload: count });
+      });
+
+      it('should dispatch the select frame action with the correct payload', () => {
+        const count = 1;
+        const e = { state: { __count__: count } };
+        countStub.returns(count);
+        selectFrameStub.withArgs(count).returns({ type: 'bar', payload: count });
+
+        instance.onPop(e)
+
+        expect(selectFrameStub).to.be.calledWith(count);
+        expect(dispatch).to.be.calledWith({ type: 'bar', payload: count });
       });
     });
   });
