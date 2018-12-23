@@ -60,6 +60,27 @@ describe('HistoryVisualizer', () => {
         expect(go).to.be.calledWith(2);
       });
     });
+
+    describe('initElems()', () => {
+      beforeEach(() => {
+        // Since `initElems()` has already been invoked, we must delete this property.
+        delete instance.elems;
+      });
+
+      it('should set the `elems` property to the default value', () => {
+        instance.initElems();
+
+        expect(instance.elems).to.eql({});
+      });
+
+      it('should set the `elems` property to the value provided', () => {
+        const elems = { foo: 'bar' };
+
+        instance.initElems(elems);
+
+        expect(instance.elems).to.eq(elems);
+      });
+    });
   });
 
   describe('Instance properties', () => {

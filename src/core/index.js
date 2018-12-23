@@ -54,8 +54,8 @@ export class HistoryVisualizer {
     );
   }
 
-  initElems() {
-    this.elems = {};
+  initElems(elems = {}) {
+    this.elems = elems;
   }
 
   initStore() {
