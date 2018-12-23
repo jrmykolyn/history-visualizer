@@ -93,6 +93,33 @@ describe('HistoryVisualizer', () => {
         expect(instance.store).to.eql({ foo: 'bar' });
       });
     });
+
+    describe('ingestApi()', () => {
+      it('should capture the target API methods as `originalMethods`', () => {
+        delete instance.originalMethods;
+        const noop = () => null;
+        const targetMethods = {
+          back: noop,
+          forward: noop,
+          go: noop,
+          pushState: noop,
+          replaceState: noop,
+        };
+        const additionalMethods = {
+          foo: noop,
+          bar: noop,
+        };
+        // eslint-disable-next-line no-shadow
+        const api = {
+          ...targetMethods,
+          ...additionalMethods,
+        };
+
+        instance.ingestApi(api);
+
+        expect(instance.originalMethods).to.eql(targetMethods);
+      });
+    });
   });
 
   describe('Instance properties', () => {
