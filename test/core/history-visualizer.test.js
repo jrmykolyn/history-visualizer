@@ -63,6 +63,42 @@ describe('HistoryVisualizer', () => {
       });
     });
 
+    describe('init()', () => {
+      let addEventListener;
+      let initUiStub;
+
+      beforeEach(() => {
+        addEventListener = sinon.stub();
+        initUiStub = sinon.stub();
+        instance.initUi = initUiStub;
+        global.window = { addEventListener };
+      });
+
+      it('should register a `popstate` listener', () => {
+        instance.init();
+
+        expect(addEventListener).to.be.calledWith('popstate');
+      });
+
+      it('should invoke `patchApi()`', () => {
+        // eslint-disable-next-line no-shadow
+        const api = { foo: 'bar' };
+        const patchApi = sinon.stub();
+        instance.options = { api };
+        instance.patchApi = patchApi;
+
+        instance.init();
+
+        expect(patchApi).to.be.calledWith(api);
+      });
+
+      it('should invoke `initUi()`', () => {
+        instance.init();
+
+        expect(initUiStub).to.be.called;
+      });
+    });
+
     describe('initElems()', () => {
       beforeEach(() => {
         // Since `initElems()` has already been invoked, we must delete this property.
