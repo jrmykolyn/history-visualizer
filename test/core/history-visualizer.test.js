@@ -2,6 +2,7 @@ import { it } from 'mocha';
 import chai, { expect } from 'chai';
 import sinon from 'sinon';
 import sinonChai from 'sinon-chai';
+import ReactDOM from 'react-dom';
 import * as redux from 'redux';
 
 import * as State from '../../src/state';
@@ -128,6 +129,23 @@ describe('HistoryVisualizer', () => {
         instance.initStore();
 
         expect(instance.store).to.eql({ foo: 'bar' });
+      });
+    });
+
+    describe('initUi()', () => {
+      it('should invoke `ReactDOM.render()`', () => {
+        const elems = { foo: 'bar' };
+        const getOrCreateRootElem = sinon.stub();
+        const renderStub = sinon.stub(ReactDOM, 'render');
+        instance.utils = { getOrCreateRootElem };
+        instance.elems = elems;
+
+        instance.initUi();
+
+        expect(getOrCreateRootElem).to.be.calledWithExactly(elems);
+        expect(renderStub).to.be.called;
+
+        renderStub.restore();
       });
     });
 
