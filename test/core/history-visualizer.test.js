@@ -7,6 +7,7 @@ import * as redux from 'redux';
 
 import * as State from '../../src/state';
 import { HistoryVisualizer } from '../../src/core';
+import { HistoryVisualizerUtils } from '../../src/core/utils';
 
 chai.use(sinonChai);
 
@@ -17,6 +18,69 @@ describe('HistoryVisualizer', () => {
   describe('General', () => {
     it('should be constructable', () => {
       expect(new HistoryVisualizer()).to.be.an.instanceof(HistoryVisualizer);
+    });
+  });
+
+  describe('constructor', () => {
+    let initElems;
+    let initStore;
+    let ingestApi;
+    let originalInitElems;
+    let originalInitStore;
+    let originalIngestApi;
+
+    beforeEach(() => {
+      initElems = sinon.spy();
+      initStore = sinon.spy();
+      ingestApi = sinon.spy();
+      originalInitElems = HistoryVisualizer.prototype.initElems;
+      originalInitStore = HistoryVisualizer.prototype.initStore;
+      originalIngestApi = HistoryVisualizer.prototype.ingestApi;
+      HistoryVisualizer.prototype.initElems = initElems;
+      HistoryVisualizer.prototype.initStore = initStore;
+      HistoryVisualizer.prototype.ingestApi = ingestApi;
+    });
+
+    afterEach(() => {
+      HistoryVisualizer.prototype.initElems = originalInitElems;
+      HistoryVisualizer.prototype.initStore = originalInitStore;
+      HistoryVisualizer.prototype.ingestApi = originalIngestApi;
+    });
+
+    it('should assign the options, window, and document', () => {
+      const win = {};
+      const doc = {};
+      const opts = { window: win, document: doc };
+
+      const instance = new HistoryVisualizer(opts);
+
+      expect(instance.options).to.eq(opts);
+      expect(instance.window).to.eq(win);
+      expect(instance.document).to.eq(doc);
+    });
+
+    it('should invoke `initElems()` and `initStore()`', () => {
+      // eslint-disable-next-line no-unused-vars
+      const instance = new HistoryVisualizer();
+
+      expect(initElems).to.be.called;
+      expect(initStore).to.be.called;
+    });
+
+    it('should ingest the API', () => {
+      const api = {};
+      const opts = { api };
+
+      // eslint-disable-next-line no-unused-vars
+      const instance = new HistoryVisualizer(opts);
+
+      expect(ingestApi).to.be.calledWithExactly(api);
+    });
+
+    it('should setup the utilities', () => {
+      const instance = new HistoryVisualizer();
+
+      expect(instance.utils).to.be.an.instanceof(HistoryVisualizerUtils);
     });
   });
 
