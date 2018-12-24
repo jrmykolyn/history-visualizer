@@ -21,7 +21,7 @@ describe('Reducers', () => {
       const state = { entries: [] };
       const frame = {
         state: {
-          '__count__': 0,
+          __count__: 0,
         },
       };
       expect(frames(state, { type: Actions.ADD_FRAME, payload: frame })).to.eql({
@@ -33,22 +33,22 @@ describe('Reducers', () => {
     it('should trim the frames', () => {
       const state = {
         entries: [
-          { state: { '__count__': 0 } },
-          { state: { '__count__': 1 } },
-          { state: { '__count__': 2 } },
+          { state: { __count__: 0 } },
+          { state: { __count__: 1 } },
+          { state: { __count__: 2 } },
         ],
       };
       const frame = {
         state: {
-          '__count__': 1,
+          __count__: 1,
         },
       };
 
       expect(frames(state, { type: Actions.ADD_FRAME, payload: frame })).to.eql({
         current: 0,
         entries: [
-          { state: { '__count__': 1 } },
-          { state: { '__count__': 0 } },
+          { state: { __count__: 1 } },
+          { state: { __count__: 0 } },
         ],
       });
     });
@@ -60,7 +60,7 @@ describe('Reducers', () => {
     });
 
     it('should select the frame', () => {
-      const entry = { state: { '__count__': 0 } };
+      const entry = { state: { __count__: 0 } };
       const state = {
         entries: [entry],
         current: 1,

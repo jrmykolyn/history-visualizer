@@ -275,7 +275,7 @@ describe('HistoryVisualizer', () => {
         const e = { state: { __count__: count } };
         setCountStub.withArgs(count).returns({ type: 'foo', payload: count });
 
-        instance.onPop(e)
+        instance.onPop(e);
 
         expect(setCountStub).to.be.calledWith(count);
         expect(dispatch).to.be.calledWith({ type: 'foo', payload: count });
@@ -287,7 +287,7 @@ describe('HistoryVisualizer', () => {
         countStub.returns(count);
         selectFrameStub.withArgs(count).returns({ type: 'bar', payload: count });
 
-        instance.onPop(e)
+        instance.onPop(e);
 
         expect(selectFrameStub).to.be.calledWith(count);
         expect(dispatch).to.be.calledWith({ type: 'bar', payload: count });

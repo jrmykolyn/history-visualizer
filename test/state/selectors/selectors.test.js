@@ -1,7 +1,7 @@
 import { it } from 'mocha';
 import { expect } from 'chai';
 
-import * as Selectors  from '../../../src/state/selectors';
+import * as Selectors from '../../../src/state/selectors';
 
 // --------------------------------------------------
 // DEFINE TESTS

@@ -76,5 +76,4 @@ describe('HistoryVisualizerUtils', () => {
       expect(utils.document).to.eq(doc);
     });
   });
-
 });

@@ -3,18 +3,18 @@ import { expect } from 'chai';
 
 import { Actions as Types, ActionCreators as Actions } from '../../../src/state/actions';
 
-// -------------------------------------------------- 
+// --------------------------------------------------
 // DEFINE TESTS
-// -------------------------------------------------- 
+// --------------------------------------------------
 describe('Action creators', () => {
   describe('General', () => {
     const dictionary = {
-      'addFrame': Types.ADD_FRAME,
-      'incrementCount': Types.INCREMENT_COUNT,
-      'selectFrame': Types.SELECT_FRAME,
-      'setCount': Types.SET_COUNT,
-      'toggleDrawer': Types.TOGGLE_DRAWER,
-      'toggleModal': Types.TOGGLE_MODAL,
+      addFrame: Types.ADD_FRAME,
+      incrementCount: Types.INCREMENT_COUNT,
+      selectFrame: Types.SELECT_FRAME,
+      setCount: Types.SET_COUNT,
+      toggleDrawer: Types.TOGGLE_DRAWER,
+      toggleModal: Types.TOGGLE_MODAL,
     };
 
     Object.keys(dictionary).forEach((method) => {
