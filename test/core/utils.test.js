@@ -10,7 +10,7 @@ import { HistoryVisualizerUtils } from '../../src/core/utils';
 describe('HistoryVisualizerUtils', () => {
   describe('General', () => {
     it('should be constructable', () => {
-      expect(new HistoryVisualizerUtils).to.be.an.instanceof(HistoryVisualizerUtils);
+      expect(new HistoryVisualizerUtils()).to.be.an.instanceof(HistoryVisualizerUtils);
     });
   });
 
