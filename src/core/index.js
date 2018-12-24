@@ -41,7 +41,7 @@ export class HistoryVisualizer {
 
   init() {
     // Register listeners
-    window.addEventListener('popstate', e => this.onPop(e));
+    window.addEventListener('popstate', this.onPop.bind(this));
 
     this.patchApi(this.options.api);
 

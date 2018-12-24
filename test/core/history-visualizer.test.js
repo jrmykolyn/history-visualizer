@@ -140,9 +140,16 @@ describe('HistoryVisualizer', () => {
       });
 
       it('should register a `popstate` listener', () => {
+        const originalBind = HistoryVisualizer.prototype.onPop.bind;
+        const bind = sinon.spy();
+        HistoryVisualizer.prototype.onPop.bind = bind;
+
         instance.init();
 
         expect(addEventListener).to.be.calledWith('popstate');
+        expect(bind).to.be.called;
+
+        HistoryVisualizer.prototype.onPop.bind = originalBind;
       });
 
       it('should invoke `patchApi()`', () => {
