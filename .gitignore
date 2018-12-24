@@ -1,5 +1,9 @@
 node_modules/
 
+# Ignore test coverage
+.nyc_output/
+coverage/
+
 # Prevent distribution file from being added to version control.
 ext/main.js
 

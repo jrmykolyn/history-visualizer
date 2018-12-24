@@ -11,7 +11,8 @@
     "lint:scripts": "eslint ./src/",
     "lint:scripts:fix": "eslint --fix ./src/",
     "preversion": "node ./scripts/version/pre.js",
-    "test": "mocha --require babel-core/register --require ./test/bootstrap --recursive ./test"
+    "test": "mocha --require babel-core/register --require ./test/bootstrap --recursive ./test",
+    "test:coverage": "nyc npm run test"
   },
   "author": "Jesse R Mykolyn",
   "license": "ISC",
