@@ -12,7 +12,6 @@ import App from '../tags/app';
 import {
   API_METHODS,
   COUNT_KEY,
-  ROOT_CLASS,
 } from '../config';
 import { HistoryVisualizerUtils } from './utils';
 
