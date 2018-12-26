@@ -1,7 +1,7 @@
-const React = require('react');
-const { connect } = require('react-redux');
+import React from 'react';
+import { connect } from 'react-redux';
 import './index.css';
-const { ActionCreators } = require('../../../state/actions');
+import { ActionCreators } from '../../../state/actions';
 
 export class Modal extends React.Component {
   render() {
