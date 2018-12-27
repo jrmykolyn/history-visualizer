@@ -1,4 +1,4 @@
-import HistoryVisualizer from './core';
+import HistoryVisualizer from './core/index';
 
 ((window, document) => {
   const historyVisualizer = window.__HISTORY_VISUALIZER__

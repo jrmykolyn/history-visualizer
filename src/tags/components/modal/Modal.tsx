@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import './index.css';
-import { ActionCreators } from '../../../state/actions';
+import { ActionCreators } from '../../../state/actions/index';
 
 export class Modal extends React.Component {
   render() {

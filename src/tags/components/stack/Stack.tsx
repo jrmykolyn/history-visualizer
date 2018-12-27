@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Frame } from '..';
 import './index.css';
-import { ActionCreators } from '../../../state/actions';
+import { ActionCreators } from '../../../state/actions/index';
 
 export class Stack extends React.Component {
   constructor() {

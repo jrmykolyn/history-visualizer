@@ -7,12 +7,12 @@ import {
   ActionCreators,
   rootReducer,
   Selectors,
-} from '../state';
-import App from '../tags/app';
+} from '../state/index';
+import App from '../tags/app/App';
 import {
   API_METHODS,
   COUNT_KEY,
-} from '../config';
+} from '../config/index';
 import { HistoryVisualizerUtils } from './utils';
 
 export class HistoryVisualizer {
