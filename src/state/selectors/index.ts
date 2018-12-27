@@ -1,1 +1,3 @@
-export const count = state => state.frames.count;
+import { State } from '..';
+
+export const count = (state: { frames: State.Frames }) => state.frames.count;

@@ -1,9 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { Action, Dispatch } from 'redux';
 import './index.css';
-import { ActionCreators } from '../../../state/actions/index';
+import { ActionCreators, State } from '../../../state';
 
-export class Modal extends React.Component {
+export class Modal extends React.Component<Modal.Props> {
   render() {
     return (
       <div className={ this.props.isOpen ? 'modal-wrapper is-active' : 'modal-wrapper' }>
@@ -16,14 +17,24 @@ export class Modal extends React.Component {
   }
 }
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = (dispatch: Dispatch<Action>) => ({
   toggleModal: () => dispatch(ActionCreators.toggleModal()),
 });
 
-const mapStateToProps = state => ({
-  selected: state.frames.entries[state.ui.modal.selectedEntry],
-  isOpen: state.ui.modal.isOpen,
-  index: state.ui.modal.selectedEntry,
-});
+const mapStateToProps = (state: { frames: State.Frames; ui: State.Ui }) => {
+  return ({
+    selected: state.frames.entries[state.ui.modal.selectedEntry],
+    isOpen: state.ui.modal.isOpen,
+    index: state.ui.modal.selectedEntry,
+  });
+}
+
+export namespace Modal {
+  export interface Props {
+    isOpen: boolean;
+    toggleModal: () => void;
+    selected: State.Frame;
+  }
+}
 
 export default connect(mapStateToProps, mapDispatchToProps)(Modal);

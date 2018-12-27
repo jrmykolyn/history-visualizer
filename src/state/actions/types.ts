@@ -1,4 +1,4 @@
-export const Actions = {
+export const Types = {
   ADD_FRAME: 'ADD_FRAME',
   INCREMENT_COUNT: 'INCREMENT_COUNT',
   SELECT_FRAME: 'SELECT_FRAME',
@@ -7,4 +7,4 @@ export const Actions = {
   TOGGLE_MODAL: 'TOGGLE_MODAL',
 };
 
-export default Actions;
+export default Types;

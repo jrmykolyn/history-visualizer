@@ -1,5 +1,5 @@
-import { Actions, ActionCreators } from './actions';
-import rootReducer from './reducers';
+import { Actions, ActionCreators, Types } from './actions';
+import rootReducer, { State } from './reducers';
 import * as Selectors from './selectors';
 
 export {
@@ -7,4 +7,6 @@ export {
   ActionCreators,
   rootReducer,
   Selectors,
+  State,
+  Types,
 };

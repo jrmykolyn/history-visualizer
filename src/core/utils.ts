@@ -1,16 +1,23 @@
 import { ROOT_CLASS } from '../config';
+import {
+  Elems,
+  HistoryVisualizerOptions,
+} from '.';
 
 export class HistoryVisualizerUtils {
-  constructor(options = {}) {
+  document: Document;
+  window: Window;
+
+  constructor(options: HistoryVisualizerOptions) {
     this.document = options.document;
     this.window = options.window;
   }
 
-  getClassAsSelector(className) {
+  getClassAsSelector(className: string) {
     return `.${className}`;
   }
 
-  getOrCreateRootElem(elems) {
+  getOrCreateRootElem(elems: Elems) {
     if (!elems.rootElem) {
       const node = this.document.createElement('section');
       node.classList.add(this.getRootClass());
@@ -21,7 +28,7 @@ export class HistoryVisualizerUtils {
     return elems.rootElem;
   }
 
-  getRootClass(asSelector) {
+  getRootClass(asSelector?: boolean) {
     const identifier = ROOT_CLASS;
     return asSelector
       ? this.getClassAsSelector(identifier)

@@ -1,8 +1,10 @@
 import HistoryVisualizer from './core/index';
 
+declare const window: any;
+
 ((window, document) => {
-  const historyVisualizer = window.__HISTORY_VISUALIZER__
-    || (window.__HISTORY_VISUALIZER__ = new HistoryVisualizer({ document, window, api: window.history }));
+  const historyVisualizer = window['__HISTORY_VISUALIZER__']
+    || (window['__HISTORY_VISUALIZER__'] = new HistoryVisualizer({ document, window, api: window.history }));
 
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', () => {

@@ -1,12 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import { createStore } from 'redux';
-
+import { createStore, Store } from 'redux';
 import {
   ActionCreators,
   rootReducer,
   Selectors,
+  State,
 } from '../state/index';
 import App from '../tags/app/App';
 import {
@@ -15,14 +15,42 @@ import {
 } from '../config/index';
 import { HistoryVisualizerUtils } from './utils';
 
+export interface HistoryVisualizerOptions {
+  api: History;
+  document: Document;
+  window: Window;
+};
+
+export interface Historyish {
+  back: () => void;
+  forward: () => void;
+  go: (n: number) => void;
+  pushState: (state: State.FrameState, title: string, url: string) => void;
+  replaceState: (state: State.FrameState, title: string, url: string) => void;
+}
+
+export interface Elems {
+  [key: string]: HTMLElement;
+}
+
 export class HistoryVisualizer {
-  constructor(options = {}) {
-    this.initElems();
-    this.initStore();
+  [key: string]: any;
+  api: Historyish = {} as Historyish;
+  document: Document;
+  elems: Elems;
+  options: HistoryVisualizerOptions;
+  originalMethods: Historyish;
+  store: Store;
+  utils: HistoryVisualizerUtils;
+  window: Window;
+
+  constructor(options: HistoryVisualizerOptions) {
+    this.elems = this.initElems();
+    this.store = this.initStore();
     this.options = options;
     this.document = options.document;
     this.window = options.window;
-    this.ingestApi(options.api);
+    this.originalMethods = this.ingestApi(options.api);
     this.utils = new HistoryVisualizerUtils(options);
   }
 
@@ -34,7 +62,7 @@ export class HistoryVisualizer {
     this.originalMethods.forward.call(this.window.history);
   }
 
-  go(n) {
+  go(n: number) {
     this.originalMethods.go.call(this.window.history, n);
   }
 
@@ -49,11 +77,11 @@ export class HistoryVisualizer {
   }
 
   initElems(elems = {}) {
-    this.elems = elems;
+    return elems;
   }
 
   initStore() {
-    this.store = createStore(rootReducer);
+    return createStore(rootReducer);
   }
 
   initUi() {
@@ -65,24 +93,24 @@ export class HistoryVisualizer {
     );
   }
 
-  ingestApi(api = {}) {
-    this.originalMethods = API_METHODS.reduce((acc, method) => ({ ...acc, [method]: api[method] }), {});
+  ingestApi(api: History & { [key: string]: any }) {
+    return API_METHODS.reduce((acc, method) => ({ ...acc, [method]: api[method] }), {} as Historyish);
   }
 
-  onPop(e) {
+  onPop(e: PopStateEvent) {
     this.store.dispatch(ActionCreators.setCount(e.state[COUNT_KEY]));
     this.store.dispatch(ActionCreators.selectFrame(Selectors.count(this.store.getState())));
   }
 
-  patchApi(api = {}) {
+  patchApi(api: History & { [key: string]: any }) {
     // Monkey-patch
     this.api = API_METHODS.reduce((acc, method) => {
-      acc[method] = (...args) => this[method](...args);
+      acc[method] = (...args: any[]) => this[method](...args);
       return acc;
     }, api);
   }
 
-  pushState(state, title, url) {
+  pushState(state: State.FrameState, title: string, url: string) {
     // Bump count.
     this.store.dispatch(ActionCreators.incrementCount());
 
@@ -95,7 +123,7 @@ export class HistoryVisualizer {
     this.store.dispatch(ActionCreators.addFrame({ title, url, state: enhancedState }));
   }
 
-  replaceState(state, title, url) {
+  replaceState(state: State.FrameState, title: string, url: string) {
     const enhancedState = { ...state, [COUNT_KEY]: Selectors.count(this.store.getState()) };
     this.originalMethods.replaceState.apply(this.window.history, [enhancedState, title, url]);
   }
