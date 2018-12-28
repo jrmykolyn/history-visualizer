@@ -4,7 +4,7 @@
   left: 0;
   width: 0;
   height: 0;
-  z-index: 1000;
+  z-index: 999999;
   opacity: 0;
   transition: opacity 0.15s 0s, width 0s 0.1s, height 0s 0.1s;
   overflow: hidden;
@@ -27,6 +27,7 @@
 }
 
 .hv .modal {
+  display: block !important;
   width: 90%;
   max-width: 600px;
   height: 90%;
