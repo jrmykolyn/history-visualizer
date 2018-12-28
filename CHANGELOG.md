@@ -13,6 +13,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 - TEST: Added tests for HistoryVisualizer. [topic-14]
 
 ### Changed
+- UI:  Prevented element styles from being clobbered by vendor stylesheets. [topic-9]
 
 ### Fixed
 
