@@ -3,8 +3,6 @@
 const { execSync } = require('child_process');
 const fs = require('fs');
 
-console.log(process.cwd());
-
 // Extract new version
 const {
   npm_package_version: packageVersion,
