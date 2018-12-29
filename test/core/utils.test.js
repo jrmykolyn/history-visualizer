@@ -10,7 +10,11 @@ import { HistoryVisualizerUtils } from '../../src/core/utils';
 describe('HistoryVisualizerUtils', () => {
   describe('General', () => {
     it('should be constructable', () => {
-      expect(new HistoryVisualizerUtils()).to.be.an.instanceof(HistoryVisualizerUtils);
+      const opts = {
+        api: {},
+      };
+
+      expect(new HistoryVisualizerUtils(opts)).to.be.an.instanceof(HistoryVisualizerUtils);
     });
   });
 
@@ -18,7 +22,7 @@ describe('HistoryVisualizerUtils', () => {
     let utils;
 
     beforeEach(() => {
-      utils = new HistoryVisualizerUtils();
+      utils = new HistoryVisualizerUtils({ api: {} });
     });
 
     describe('getClassAsSelector', () => {

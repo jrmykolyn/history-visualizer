@@ -17,11 +17,16 @@ chai.use(sinonChai);
 describe('HistoryVisualizer', () => {
   describe('General', () => {
     it('should be constructable', () => {
-      expect(new HistoryVisualizer()).to.be.an.instanceof(HistoryVisualizer);
+      const opts = {
+        api: {},
+      };
+
+      expect(new HistoryVisualizer(opts)).to.be.an.instanceof(HistoryVisualizer);
     });
   });
 
   describe('constructor', () => {
+    let instance;
     let initElems;
     let initStore;
     let ingestApi;
@@ -30,8 +35,9 @@ describe('HistoryVisualizer', () => {
     let originalIngestApi;
 
     beforeEach(() => {
-      initElems = sinon.spy();
-      initStore = sinon.spy();
+      instance = null;
+      initElems = sinon.spy(() => ({}));
+      initStore = sinon.spy(() => ({}));
       ingestApi = sinon.spy();
       originalInitElems = HistoryVisualizer.prototype.initElems;
       originalInitStore = HistoryVisualizer.prototype.initStore;
@@ -52,7 +58,7 @@ describe('HistoryVisualizer', () => {
       const doc = {};
       const opts = { window: win, document: doc };
 
-      const instance = new HistoryVisualizer(opts);
+      instance = new HistoryVisualizer(opts);
 
       expect(instance.options).to.eq(opts);
       expect(instance.window).to.eq(win);
@@ -60,25 +66,33 @@ describe('HistoryVisualizer', () => {
     });
 
     it('should invoke `initElems()` and `initStore()`', () => {
-      // eslint-disable-next-line no-unused-vars
-      const instance = new HistoryVisualizer();
+      const opts = {
+        api: {},
+      };
+
+      instance = new HistoryVisualizer(opts);
 
       expect(initElems).to.be.called;
       expect(initStore).to.be.called;
+      expect(instance.elems).to.eql({});
+      expect(instance.store).to.eql({});
     });
 
     it('should ingest the API', () => {
       const api = {};
       const opts = { api };
 
-      // eslint-disable-next-line no-unused-vars
-      const instance = new HistoryVisualizer(opts);
+      new HistoryVisualizer(opts);
 
       expect(ingestApi).to.be.calledWithExactly(api);
     });
 
     it('should setup the utilities', () => {
-      const instance = new HistoryVisualizer();
+      const opts = {
+        api: {},
+      };
+
+      instance = new HistoryVisualizer(opts);
 
       expect(instance.utils).to.be.an.instanceof(HistoryVisualizerUtils);
     });
@@ -98,9 +112,7 @@ describe('HistoryVisualizer', () => {
       go = sinon.spy();
       win = { history: {} };
       api = { back, forward, go };
-      instance = new HistoryVisualizer();
-      instance.window = win;
-      instance.originalMethods = api;
+      instance = new HistoryVisualizer({ api, window: win });
     });
 
     describe('back()', () => {
@@ -171,38 +183,6 @@ describe('HistoryVisualizer', () => {
       });
     });
 
-    describe('initElems()', () => {
-      beforeEach(() => {
-        // Since `initElems()` has already been invoked, we must delete this property.
-        delete instance.elems;
-      });
-
-      it('should set the `elems` property to the default value', () => {
-        instance.initElems();
-
-        expect(instance.elems).to.eql({});
-      });
-
-      it('should set the `elems` property to the value provided', () => {
-        const elems = { foo: 'bar' };
-
-        instance.initElems(elems);
-
-        expect(instance.elems).to.eq(elems);
-      });
-    });
-
-    describe('initStore()', () => {
-      it('should create a new application store', () => {
-        sinon.stub(redux, 'createStore').returns({ foo: 'bar' });
-        delete instance.store;
-
-        instance.initStore();
-
-        expect(instance.store).to.eql({ foo: 'bar' });
-      });
-    });
-
     describe('initUi()', () => {
       it('should invoke `ReactDOM.render()`', () => {
         const elems = { foo: 'bar' };
@@ -221,7 +201,7 @@ describe('HistoryVisualizer', () => {
     });
 
     describe('ingestApi()', () => {
-      it('should capture the target API methods as `originalMethods`', () => {
+      it('should capture and return the `originalMethods`', () => {
         delete instance.originalMethods;
         const noop = () => null;
         const targetMethods = {
@@ -241,9 +221,7 @@ describe('HistoryVisualizer', () => {
           ...additionalMethods,
         };
 
-        instance.ingestApi(api);
-
-        expect(instance.originalMethods).to.eql(targetMethods);
+        expect(instance.ingestApi(api)).to.eql(targetMethods);
       });
     });
 
@@ -398,8 +376,5 @@ describe('HistoryVisualizer', () => {
         countStub.restore();
       });
     });
-  });
-
-  describe('Instance properties', () => {
   });
 });

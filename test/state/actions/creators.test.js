@@ -1,7 +1,7 @@
 import { it } from 'mocha';
 import { expect } from 'chai';
 
-import { Actions as Types, ActionCreators as Actions } from '../../../src/state/actions';
+import { Types as ActionTypes, ActionCreators as Actions } from '../../../src/state/actions';
 
 // --------------------------------------------------
 // DEFINE TESTS
@@ -9,12 +9,12 @@ import { Actions as Types, ActionCreators as Actions } from '../../../src/state/
 describe('Action creators', () => {
   describe('General', () => {
     const dictionary = {
-      addFrame: Types.ADD_FRAME,
-      incrementCount: Types.INCREMENT_COUNT,
-      selectFrame: Types.SELECT_FRAME,
-      setCount: Types.SET_COUNT,
-      toggleDrawer: Types.TOGGLE_DRAWER,
-      toggleModal: Types.TOGGLE_MODAL,
+      addFrame: ActionTypes.ADD_FRAME,
+      incrementCount: ActionTypes.INCREMENT_COUNT,
+      selectFrame: ActionTypes.SELECT_FRAME,
+      setCount: ActionTypes.SET_COUNT,
+      toggleDrawer: ActionTypes.TOGGLE_DRAWER,
+      toggleModal: ActionTypes.TOGGLE_MODAL,
     };
 
     Object.keys(dictionary).forEach((method) => {

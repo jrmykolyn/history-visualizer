@@ -52,4 +52,6 @@ export namespace State {
   };
 };
 
+export { frames, ui };
+
 export default combineReducers({ frames, ui });

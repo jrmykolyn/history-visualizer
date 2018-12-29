@@ -1,7 +1,7 @@
 import { it } from 'mocha';
 import { expect } from 'chai';
 
-import { Actions } from '../../../src/state/actions';
+import { Types as ActionTypes } from '../../../src/state/actions';
 import { frames, ui } from '../../../src/state/reducers';
 
 // --------------------------------------------------
@@ -24,7 +24,7 @@ describe('Reducers', () => {
           __count__: 0,
         },
       };
-      expect(frames(state, { type: Actions.ADD_FRAME, payload: frame })).to.eql({
+      expect(frames(state, { type: ActionTypes.ADD_FRAME, payload: frame })).to.eql({
         current: 0,
         entries: [frame],
       });
@@ -44,7 +44,7 @@ describe('Reducers', () => {
         },
       };
 
-      expect(frames(state, { type: Actions.ADD_FRAME, payload: frame })).to.eql({
+      expect(frames(state, { type: ActionTypes.ADD_FRAME, payload: frame })).to.eql({
         current: 0,
         entries: [
           { state: { __count__: 1 } },
@@ -56,7 +56,7 @@ describe('Reducers', () => {
     it('should incremement the count', () => {
       const state = { count: 0 };
 
-      expect(frames(state, { type: Actions.INCREMENT_COUNT })).to.eql({ count: 1 });
+      expect(frames(state, { type: ActionTypes.INCREMENT_COUNT })).to.eql({ count: 1 });
     });
 
     it('should select the frame', () => {
@@ -66,7 +66,7 @@ describe('Reducers', () => {
         current: 1,
       };
 
-      expect(frames(state, { type: Actions.SELECT_FRAME, payload: 0 })).to.eql({
+      expect(frames(state, { type: ActionTypes.SELECT_FRAME, payload: 0 })).to.eql({
         entries: [entry],
         current: 0,
       });
@@ -75,7 +75,7 @@ describe('Reducers', () => {
     it('should set the count', () => {
       const state = { count: 0 };
 
-      expect(frames(state, { type: Actions.SET_COUNT, payload: 1 })).to.eql({ count: 1 });
+      expect(frames(state, { type: ActionTypes.SET_COUNT, payload: 1 })).to.eql({ count: 1 });
     });
 
     it('should return the state', () => {
@@ -105,7 +105,7 @@ describe('Reducers', () => {
         },
       };
 
-      expect(ui(state, { type: Actions.TOGGLE_DRAWER })).to.eql({ drawer: { isOpen: true } });
+      expect(ui(state, { type: ActionTypes.TOGGLE_DRAWER })).to.eql({ drawer: { isOpen: true } });
     });
 
     it('should toggle the modal', () => {
@@ -116,7 +116,7 @@ describe('Reducers', () => {
         },
       };
 
-      expect(ui(state, { type: Actions.TOGGLE_MODAL, payload: 1 })).to.eql({
+      expect(ui(state, { type: ActionTypes.TOGGLE_MODAL, payload: 1 })).to.eql({
         modal: {
           isOpen: true,
           selectedEntry: 1,
