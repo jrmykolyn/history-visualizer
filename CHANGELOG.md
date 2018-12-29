@@ -6,6 +6,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 ## [Unreleased]
 
 ### Added
+- PKG: Added TypeScript-related development dependencies. [topic-7]
 - TEST: Added tests for action creators. [topic-11]
 - TEST: Added tests for reducers. [topic-12]
 - TEST: Added tests for selectors. [topic-13]
@@ -13,11 +14,13 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 - TEST: Added tests for HistoryVisualizer. [topic-14]
 
 ### Changed
-- UI:  Prevented element styles from being clobbered by vendor stylesheets. [topic-9]
+- UI: Prevented element styles from being clobbered by vendor stylesheets. [topic-9]
+- Converted JavaScript implementation to TypeScript. [topic-7]
 
 ### Fixed
 
 ### Removed
+- PKG: Removed ESLint and related development dependencies. [topic-7]
 
 ## [0.1.0] - 2018-12-15
 
