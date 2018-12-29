@@ -1,0 +1,30 @@
+{
+  "parser": "babel-eslint",
+  "env": {
+    "browser": true,
+    "commonjs": true,
+    "es6": true,
+    "node": true,
+    "mocha": true
+  },
+  "extends": "tslint-config-airbnb",
+  "parserOptions": {
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "jsx": true
+    }
+  },
+  "plugins": [
+    "react"
+  ],
+  "rules": {
+    "import/no-extraneous-dependencies": [ "error", {
+      "devDependencies": ["src/test/**/*"]
+    } ],
+    "import-name": false,
+    "max-line-length": [true, 250],
+    "no-debugger": 1,
+    "no-boolean-literal-compare": true,
+    "variable-name": false
+  }
+}

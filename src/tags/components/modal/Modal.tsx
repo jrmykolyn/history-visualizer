@@ -27,7 +27,7 @@ const mapStateToProps = (state: { frames: State.Frames; ui: State.Ui }) => {
     isOpen: state.ui.modal.isOpen,
     index: state.ui.modal.selectedEntry,
   });
-}
+};
 
 export namespace Modal {
   export interface Props {

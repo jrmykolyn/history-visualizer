@@ -19,7 +19,7 @@ export interface HistoryVisualizerOptions {
   api: History;
   document: Document;
   window: Window;
-};
+}
 
 export interface Historyish {
   back: () => void;
@@ -104,10 +104,12 @@ export class HistoryVisualizer {
 
   patchApi(api: History & { [key: string]: any }) {
     // Monkey-patch
-    this.api = API_METHODS.reduce((acc, method) => {
-      acc[method] = (...args: any[]) => this[method](...args);
-      return acc;
-    }, api);
+    this.api = API_METHODS.reduce(
+      (acc, method) => {
+        acc[method] = (...args: any[]) => this[method](...args);
+        return acc;
+      },
+      api);
   }
 
   pushState(state: State.FrameState, title: string, url: string) {

@@ -24,33 +24,33 @@ export namespace State {
     title: string;
     url: string;
     state: State.FrameState;
-  };
+  }
 
   export interface Frames {
     count: number;
     current: number;
     entries: State.Frame[];
-  };
+  }
 
   export interface FrameState {
     [key: string]: any;
     __count__: number;
-  };
+  }
 
   export interface Ui {
     drawer: State.Drawer;
     modal: State.Modal;
-  };
+  }
 
   export interface Drawer {
     isOpen: boolean;
-  };
+  }
 
   export interface Modal {
-     isOpen: boolean;
-     selectedEntry: number;
-  };
-};
+    isOpen: boolean;
+    selectedEntry: number;
+  }
+}
 
 export { frames, ui };
 

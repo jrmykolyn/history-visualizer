@@ -7,23 +7,23 @@ namespace Actions {
   export namespace Frames {
     export interface AddFrame extends Action {
       payload: State.Frame;
-    };
+    }
 
     export interface SelectFrame extends Action {
       payload: number;
-    };
+    }
 
     export interface SetCount extends Action {
       payload: number;
-    };
-  };
+    }
+  }
 
   export namespace Ui {
     export interface ToggleModal extends Action {
       payload: number;
-    };
+    }
   }
-};
+}
 
 export type FrameActions = Actions.Frames.AddFrame
   | Actions.Frames.SelectFrame

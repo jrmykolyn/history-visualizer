@@ -20,6 +20,6 @@ export namespace Frame {
     onClick: (e: React.MouseEvent<HTMLAnchorElement>) => void;
     onEntryClick: () => void;
   }
-};
+}
 
 export default Frame;

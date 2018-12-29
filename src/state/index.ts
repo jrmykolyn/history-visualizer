@@ -1,11 +1,11 @@
 import { Actions, ActionCreators, Types } from './actions';
-import rootReducer, { State } from './reducers';
+import reducers, { State } from './reducers';
 import * as Selectors from './selectors';
 
 export {
   Actions,
   ActionCreators,
-  rootReducer,
+  reducers as rootReducer,
   Selectors,
   State,
   Types,
