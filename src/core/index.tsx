@@ -66,6 +66,12 @@ export class HistoryVisualizer {
     this.originalMethods.go.call(this.window.history, n);
   }
 
+  /**
+   * Initialize the HistoryVisualizer instance by:
+   * - registering relevant listeners.
+   * - monkey-patching the API.
+   * - injecting the application component.
+   */
   init() {
     // Register listeners
     window.addEventListener('popstate', this.onPop.bind(this));
@@ -80,10 +86,16 @@ export class HistoryVisualizer {
     return elems;
   }
 
+  /**
+   * Create and return the application store.
+   */
   initStore() {
     return createStore(rootReducer);
   }
 
+  /**
+   * Initialize the application component.
+   */
   initUi() {
     ReactDOM.render(
       <Provider store={this.store}>
@@ -93,6 +105,9 @@ export class HistoryVisualizer {
     );
   }
 
+  /**
+   * Copy and return the target API.
+   */
   ingestApi(api: History & { [key: string]: any }) {
     return API_METHODS.reduce((acc, method) => ({ ...acc, [method]: api[method] }), {} as Historyish);
   }
@@ -102,6 +117,9 @@ export class HistoryVisualizer {
     this.store.dispatch(ActionCreators.selectFrame(Selectors.count(this.store.getState())));
   }
 
+  /**
+   * Monkey-patch the target API.
+   */
   patchApi(api: History & { [key: string]: any }) {
     // Monkey-patch
     this.api = API_METHODS.reduce(
