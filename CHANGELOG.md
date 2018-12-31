@@ -3,7 +3,7 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/) and this project adheres to [Semantic Versioning](http://semver.org/).
 
-## [Unreleased]
+## [0.1.1] - 2018-12-31
 
 ### Added
 - PKG: Added TypeScript-related development dependencies. [topic-7]
