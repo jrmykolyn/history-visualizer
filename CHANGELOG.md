@@ -23,6 +23,9 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 ### Removed
 - PKG: Removed ESLint and related development dependencies. [topic-7]
 
+### Security
+- Updated dependencies to address security vulnerabilities.
+
 ## [0.1.0] - 2018-12-15
 
 ### Added
