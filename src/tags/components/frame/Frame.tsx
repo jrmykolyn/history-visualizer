@@ -9,7 +9,7 @@ export const Frame = ({
     <div className="frame__meta">
       <p><a href="#" onClick={ onClick }>{ frame.url }</a></p>
     </div>
-    <pre className="frame__payload" onClick={ onEntryClick }>{ JSON.stringify(frame.state).substring(0, 100).concat('...') }</pre>
+    <pre className="frame__payload" onClick={ onEntryClick }>{ JSON.stringify(frame.state) }</pre>
   </div>
 );
 
