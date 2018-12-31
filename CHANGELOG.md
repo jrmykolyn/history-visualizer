@@ -18,6 +18,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 - Converted JavaScript implementation to TypeScript. [topic-7]
 
 ### Fixed
+- UI: Fixed overflowing URL.
 
 ### Removed
 - PKG: Removed ESLint and related development dependencies. [topic-7]

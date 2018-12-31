@@ -22,6 +22,7 @@
 
 .hv .frame__meta p {
   margin: 0;
+  word-break: break-all;
 }
 
 .hv .frame__meta p:not(:last-child) {
