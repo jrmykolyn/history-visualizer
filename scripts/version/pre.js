@@ -3,6 +3,9 @@
 const { execSync } = require('child_process');
 const fs = require('fs');
 
+// Update and commit docs.
+execSync('./scripts/docs/update.js && ./scripts/docs/commit.js');
+
 // Extract new version
 const {
   npm_package_version: packageVersion,
