@@ -84,3 +84,17 @@
   overflow: auto;
   z-index: 1;
 }
+
+.hv .empty-stack {
+  background: #fafafa;
+  border: solid 1px #ddd;
+  padding: 8px 10px;
+}
+
+.hv .empty-stack p {
+  margin: 0;
+}
+
+.hv .empty-stack p:not(:last-child) {
+  margin-bottom: 10px;
+}

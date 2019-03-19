@@ -21,7 +21,11 @@ export class Stack extends React.Component<Stack.Props> {
         {
           this.props.frames.entries.length
             ? this.props.frames.entries.map((frame: State.Frame, i: number) => <Frame frame={frame} isActive={i === this.props.frames.current} onClick={ e => this.onFrameClick(e, i) } onEntryClick={ () => this.props.toggleModal(i) } />)
-            : ''
+            : <div className="empty-stack">
+                <div className="empty-stack__inner">
+                  <p>Whoops, it looks like this application has not added any entries to browser history.</p>
+                </div>
+              </div>
         }
         </div>
         <button onClick={ this.onToggleClick }>
