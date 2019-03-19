@@ -3,6 +3,11 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/) and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [Unreleased]
+
+### Added
+- Added 'empty state' message to stack component. [topic-20]
+
 ## [0.1.1] - 2018-12-31
 
 ### Added
