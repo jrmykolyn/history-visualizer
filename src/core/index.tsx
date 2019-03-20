@@ -113,6 +113,8 @@ export class HistoryVisualizer {
   }
 
   onPop(e: PopStateEvent) {
+    // Exit early if the Event does not include `state`.
+    if (!e.state) return;
     this.store.dispatch(ActionCreators.setCount(e.state[COUNT_KEY]));
     this.store.dispatch(ActionCreators.selectFrame(Selectors.count(this.store.getState())));
   }
