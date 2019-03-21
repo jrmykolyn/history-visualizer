@@ -3,7 +3,7 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/) and this project adheres to [Semantic Versioning](http://semver.org/).
 
-## [Unreleased]
+## [0.1.3] - 2019-03-21
 
 ### Fixed
 - Fixed issue where 'popstate' event handler threw an error if the Event object did not include the `state` property. [topic-22]
