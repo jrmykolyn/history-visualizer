@@ -248,6 +248,11 @@ describe('HistoryVisualizer', () => {
         countStub.restore();
       });
 
+      it('should exit early if the Event does not contain `state`', () => {
+        expect(instance.onPop({})).to.be.undefined;
+        expect(dispatch).to.not.be.called;
+      });
+
       it('should dispatch the set count action with the correct payload', () => {
         const count = 1;
         const e = { state: { __count__: count } };
